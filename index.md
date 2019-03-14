@@ -1,5 +1,5 @@
 # 손으로 보는 세상, 점자
-![logo](/assets/img/logo.png)
+![logo](/assets/doc/img/logo.png)
 
 ## 1. 프로젝트 목적
 
