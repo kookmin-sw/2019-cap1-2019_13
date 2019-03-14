@@ -1,5 +1,5 @@
 # 손으로 보는 세상, 점자
-![logo](http://www.naver.com)
+![logo](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/logo.png)
 
 ## 1. 프로젝트 목적
 
