@@ -22,6 +22,8 @@ Develop a program that can use both Korean and English language versions.
 ## 4. 팀 소개
 ![](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/13%EC%A1%B0%EC%82%AC%EC%A7%842.jpeg)
 ![](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/13%EC%A1%B0%EC%82%AC%EC%A7%841.jpeg)
+![사진 2019  3  14  오후 5 37 #4](https://user-images.githubusercontent.com/43328761/54345645-cd927400-4686-11e9-84f9-89a1f0209d5f.png)
+
       
 ### 김채은
 - 학번 : 20153166
