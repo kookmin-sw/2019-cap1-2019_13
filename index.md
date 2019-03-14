@@ -1,5 +1,5 @@
 # 손으로 보는 세상, 점자
-![logo](www.naver.com)
+![logo](http://www.naver.com)
 
 ## 1. 프로젝트 목적
 
