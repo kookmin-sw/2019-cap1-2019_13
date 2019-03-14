@@ -20,5 +20,46 @@ Develop a program that can use both Korean and English language versions.
 (영상 추가)
 
 ## 4. 팀 소개
+### 김채은
+학번 : 20153166
+메일 : daleyblind17@kookmin.ac.kr
+역할
+-	Team Leader
+-	User Interface 담당
+-	Mobile Application 개발
+-	하드웨어 구현
+-	Tester
 
-(팀 소개)
+### 김세훈
+학번 : 20143039
+메일 : zx9288@naver.com
+역할
+-	자료조사
+-	Mobile Application 개발 
+-	하드웨어 구현
+-	Tester
+
+### 김윤성
+학번 : 20143043
+메일 : no4cesc@nate.com
+역할
+-	하드웨어 구현
+-	아두이노 코딩
+-	Tester
+
+### 이준영
+학번 : 20165159
+메일 : isz01122@kookmin.ac.kr
+역할
+-	하드웨어 구현
+-	아두이노 코딩
+-	Tester
+
+### 장예은
+학번 : 20153221
+메일 : jangyy0926@naver.com
+역할
+-	Mobile Application 개발
+-	하드웨어 구현
+-	User Interface 담당
+-	Tester
