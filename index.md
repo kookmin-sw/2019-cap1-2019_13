@@ -15,7 +15,7 @@ Develop programs that allow not only roles in Braille transducers but also revie
 Develop a program that can use both Korean and English language versions.
 
 ## 3. 프로젝트 소개 영상
-![intro](./img/.gif)
+![intro](./img/%EC%98%81%EC%83%81.gif)
 
 ## 4. 팀 소개
 ![](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/13%EC%A1%B0%EC%82%AC%EC%A7%842.jpeg)
