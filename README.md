@@ -21,7 +21,7 @@ Develop a program that can use both Korean and English language versions.
 
 ## 4. 팀 소개
 ![](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/13%EC%A1%B0%EC%82%AC%EC%A7%842.jpeg)
-[](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/13%EC%A1%B0%EC%82%AC%EC%A7%841.jpeg)
+![](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/13%EC%A1%B0%EC%82%AC%EC%A7%841.jpeg)
 
       
 ### 김채은
