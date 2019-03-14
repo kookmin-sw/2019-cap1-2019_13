@@ -1,68 +1,24 @@
-# Welcome to GitHub
+# 손으로 보는 세상, 점자
 
-캡스톤 팀 생성을 축하합니다.
+(로고 넣을부분)
 
-## 팀소개 및 페이지를 꾸며주세요.
+## 1. 프로젝트 목적
 
-- readme.md 수정.
+본 프로젝트에서는 스마트폰 어플과 하드웨어를 연동하여 제작 후 글자와 점자를 양방향으로 변환해주는 프로그램을 개발을 목표로 한다. 기존에 있는 학습 기구들과 다르게, 스마트폰  음성인식 기능을 추가하여 시각장애인들이 더 편리하게 사용할 수 있도록 한다.
+어플로 입력한 글자와 일치하는 점자가 하드웨어를 통해 보여지고, 하드웨어에 입력한 점자는 어플을 통해 일치하는 글자로 보여지는 프로그램을 개발한다.
+단순히 점자 변환기에 역할 뿐만 아니라 점자 교육 후 퀴즈와 같은 오락 장치로 학습한 것에 대한 복습 및 흥미유발도 가능한 프로그램을 개발한다.
+한글과 영어 두가지 언어 버전을 모두 사용할 수 있는 프로그램을 개발한다.
 
-- index.md 예시보고 수정.
+## 2. Abstraction
+This project aims to develop a program that works with a smartphone application and hardware to convert letters and Braille in both directions after production. Unlike traditional learning devices, smartphone voice recognition features are added to make it more convenient for people who are blind.
+Braille that matches the characters entered in the app is shown through the hardware, and Braille entered into the hardware develops a program that is shown by matching characters through the application.
+Develop programs that allow not only roles in Braille transducers but also review and interest in learning with entertainment devices such as Braille Education and Quiz.
+Develop a program that can use both Korean and English language versions.
 
-- 수정후 팀페이지 확인하여 점검.
+## 3. 프로젝트 소개 영상
 
-**팀페이지 주소** -> https://kookmin-sw.github.io/ `{{자신의 리파지토리 아이디}}`
+(영상 추가)
 
-**예시)** 1조  https://kookmin-sw.github.io/2018-cap-1
+## 4. 팀 소개
 
-## readme파일에 아래와 같은 내용들을 추가하세요.
-
-### 1. 프로잭트 소개
-
-프로젝트
-
-### 2. 소개 영상
-
-프로젝트 소개하는 영상을 추가하세요
-
-### 3. 팀 소개
-
-팀을 소개하세요.
-
-팀원정보 및 담당이나 사진 및 SNS를 이용하여 소개하세요.
-
-### 4. 사용법
-
-소스코드제출시 설치법이나 사용법을 작성하세요.
-
-### 5. 기타
-
-추가적인 내용은 자유롭게 작성하세요.
-
-
-## Markdown을 사용하여 내용꾸미기
-
-Markdown은 작문을 스타일링하기위한 가볍고 사용하기 쉬운 구문입니다. 여기에는 다음을위한 규칙이 포함됩니다.
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-자세한 내용은 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Support or Contact
-
-readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://help.github.com/articles/about-readmes/) 이나 [contact support](https://github.com/contact) 을 이용하세요.
+(팀 소개)
