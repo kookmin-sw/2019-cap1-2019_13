@@ -1,3 +1,6 @@
+![사진 2019  3  14  오후 5 37 #4](https://user-images.githubusercontent.com/43328761/54359031-1b1dd980-46a5-11e9-90f9-bda2df47af96.png)
+
+
 # 손으로 보는 세상, 점자
 ![logo](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/logo.png)
 ![Image](./img/logo.png)
