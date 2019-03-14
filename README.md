@@ -21,8 +21,8 @@ Develop a program that can use both Korean and English language versions.
 
 ## 4. 팀 소개
 ### 김채은
-학번 : 20153166##
-메일 : daleyblind17@kookmin.ac.kr
+학번 : 20153166
+###메일 : daleyblind17@kookmin.ac.kr
 역할
 -	Team Leader
 -	User Interface 담당
