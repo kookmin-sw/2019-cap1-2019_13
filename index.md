@@ -1,6 +1,6 @@
 # 손으로 보는 세상, 점자
 ![logo](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/logo.png)
-![logo]({{ "/doc/img/logo.png" | absolute_url }})
+![logo]({{ "/doc/img/logo.png" | https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/logo.png }})
 ## 1. 프로젝트 목적
 
 본 프로젝트에서는 스마트폰 어플과 하드웨어를 연동하여 제작 후 글자와 점자를 양방향으로 변환해주는 프로그램을 개발을 목표로 한다. 기존에 있는 학습 기구들과 다르게, 스마트폰  음성인식 기능을 추가하여 시각장애인들이 더 편리하게 사용할 수 있도록 한다.
