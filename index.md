@@ -1,6 +1,5 @@
 # 손으로 보는 세상, 점자
-
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/logo.png" alt="">
+![logo](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/logo.png)
 
 ## 1. 프로젝트 목적
 
@@ -16,7 +15,6 @@ Develop programs that allow not only roles in Braille transducers but also revie
 Develop a program that can use both Korean and English language versions.
 
 ## 3. 프로젝트 소개 영상
-
 ![intro](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/%EC%98%81%EC%83%81.gif)
 
 ## 4. 팀 소개
