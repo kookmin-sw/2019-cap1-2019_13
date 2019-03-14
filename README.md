@@ -1,6 +1,6 @@
 # 손으로 보는 세상, 점자
 
-(로고 넣을부분)
+![logo](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/logo.png)
 
 ## 1. 프로젝트 목적
 
@@ -17,7 +17,7 @@ Develop a program that can use both Korean and English language versions.
 
 ## 3. 프로젝트 소개 영상
 
-(영상 추가)
+![intro](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/%EC%98%81%EC%83%81.gif)
 
 ## 4. 팀 소개
 ![](https://github.com/kookmin-sw/2019-cap1-2019_13/blob/master/doc/img/13%EC%A1%B0%EC%82%AC%EC%A7%842.jpeg)
