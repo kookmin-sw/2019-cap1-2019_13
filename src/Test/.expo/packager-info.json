@@ -1,0 +1,9 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 614,
+  "expoServerNgrokUrl": "https://tg-riv.anonymous.test.exp.direct",
+  "packagerNgrokUrl": "https://packager.tg-riv.anonymous.test.exp.direct",
+  "ngrokPid": 641
+}
