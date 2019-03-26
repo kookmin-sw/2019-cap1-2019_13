@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 
-export default class ProfileTab extends Component {
+export default class QuizTab extends Component {
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
-            <Icon name='person' style={{ color: tintColor }} />
+            <Icon name='md-play-circle' style={{ color: tintColor }} />
         )
     }
 
     render() {
         return (
             <View style={style.container}>
-                <Text>ProfileTab</Text>
+                <Text>QuizTab</Text>
             </View>
         );
     }

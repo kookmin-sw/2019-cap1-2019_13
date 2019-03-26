@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 
-export default class AddMediaTab extends Component {
+export default class StudyTab extends Component {
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
-            <Icon name='ios-add-circle' style={{ color: tintColor }} />
+            <Icon name='ios-book' style={{ color: tintColor }} />
         )
     }
 
     render() {
         return (
             <View style={style.container}>
-                <Text>AddmediaTab</Text>
+                <Text>StudyTab</Text>
             </View>
         );
     }

@@ -5,18 +5,16 @@ import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigat
 
 // 하단 탭에 들어갈 컴포넌트들
 import HomeTab from './AppTabNavigator/HomeTab';
-import SearchTab from './AppTabNavigator/SearchTab';
-import AddMediaTab from './AppTabNavigator/AddMediaTab';
-import LikesTab from './AppTabNavigator/LikesTab';
-import ProfileTab from './AppTabNavigator/ProfileTab';
+import StudyTab from './AppTabNavigator/StudyTab';
+import QuizTab from './AppTabNavigator/QuizTab';
+import InfoTab from './AppTabNavigator/InfoTab';
 
 // 하단 탭 네비게이터 생성
 const AppTabNavigator = createMaterialTopTabNavigator({
   HomeTab:{ screen: HomeTab },
-  Search:{ screen: SearchTab },
-  AddMedia:{ screen: AddMediaTab },
-  Likes:{ screen: LikesTab },
-  Profile:{ screen: ProfileTab }
+  Study:{ screen: StudyTab },
+  Quiz:{ screen: QuizTab },
+  Info:{ screen: InfoTab }
 }, {
   animationEnabled: true,
   swipeEnabled: true,
@@ -40,9 +38,9 @@ export default class MainScreen extends Component {
 
   // navigationOptions 코드 추가
   static navigationOptions = {
-    headerLeft: <Icon name='ios-camera' style={{ paddingLeft:10 }}/>,
-    title: 'Dot단배',
-    headerRight: <Icon name='ios-send' style={{ paddingRight:10 }}/>,
+    headerLeft: <Icon name='md-mic' style={{ paddingLeft:20 }}/>,
+    title: 'DOT단배',
+    headerRight: <Icon name='ios-send' style={{ paddingRight:20 }}/>,
   }
 
   render() {
