@@ -5,14 +5,14 @@ import { Icon } from 'native-base';
 export default class QuizTab extends Component {
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
-            <Icon name='md-play-circle' style={{ color: tintColor }} />
+            <Icon name='md-create' style={{ color: tintColor }} />
         )
     }
 
     render() {
         return (
             <View style={style.container}>
-                <Text>QuizTab</Text>
+                <Text>QuizTab by 예은</Text>
             </View>
         );
     }
@@ -23,5 +23,6 @@ const style = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#ffa0d2'
     }
 });
