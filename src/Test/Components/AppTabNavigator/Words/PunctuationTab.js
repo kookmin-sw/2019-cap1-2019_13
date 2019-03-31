@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions  } from 'react-native';
 import { Icon } from 'native-base';
 
-class MoumTab extends React.Component{
+const { height } = Dimensions.get('window');
+
+class PunctuationTab extends React.Component{
+    state = {
+        screenHeight: 0,
+    };
+
+    onContentSizeChange = (contentWidth, contentHeight) => {
+        this.setState({ screenHeight: contentHeight });
+    };
+
     render() {
         const {goBack} = this.props.navigation;
+        const scrollEnabled = this.state.screenHeight > height;
 
         return (
-            <View style={ styles.container }>
+            <ScrollView style={ styles.container }>
                 <View style={styles.goback}> 
                     <Icon name="md-arrow-round-back" onPress={()=>goBack()}/>
                 </View>
@@ -16,109 +27,146 @@ class MoumTab extends React.Component{
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
                         onPress={()=>this} style={styles.button}>
-                            <Text style={styles.text}>ㅏ</Text>
+                            <Text style={styles.text}>여는큰따옴표(“)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅑ</Text>
+                            <Text style={styles.text}>닫는큰따옴표(”)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅓ</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection:'row' }}>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅕ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅗ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅛ</Text>
+                            <Text style={styles.text}>여는작은따옴표(‘)</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅜ</Text>
+                            <Text style={styles.text}>닫는작은따옴표(’)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅠ</Text>
+                            <Text style={styles.text}>물결표(~)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅡ</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection:'row' }}>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅣ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅐ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅒ</Text>
+                            <Text style={styles.text}>줄임표(•••)</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅔ</Text>
+                            <Text style={styles.text}>줄임표(…)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅖ</Text>
+                            <Text style={styles.text}>느낌표(!)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅘ</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection:'row' }}>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅙ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅚ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅝ</Text>
+                            <Text style={styles.text}>마침표(.)</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅞ</Text>
+                            <Text style={styles.text}>쉼표(,)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅟ</Text>
+                            <Text style={styles.text}>물음표(?)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅢ</Text>
+                            <Text style={styles.text}>쌍점(:)</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{ flexDirection:'row' }}>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>쌍반점(;)</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>붙임표(-)</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>참고표(※)</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{ flexDirection:'row' }}>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>여는소괄호 (</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>닫는소괄호 )</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>여는중괄호 {'\{'}</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{ flexDirection:'row' }}>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>닫는중괄호 {'\}'}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>닫는소괄호 )</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>여는대괄호 [</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{ flexDirection:'row' }}>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>닫는대괄호 ]</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>가운뎃점( · )</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>{'\<'} 또는 「</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{ flexDirection:'row' }}>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>{'\>'} 또는 」</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>『 또는 《</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>』 또는 》</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{ flexDirection:'row', width: 125 }}>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>빗금(/)</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
 
                 
         );
@@ -139,13 +187,13 @@ const styles = StyleSheet.create({
     syllables: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 40
+        marginBottom: 50,
     },
     button: {
         borderRadius:20, 
         margin:10, 
         flex: 1,
-        height:55, 
+        height:65, 
         backgroundColor:'dodgerblue', 
         justifyContent:'center',
     }, 
@@ -153,8 +201,8 @@ const styles = StyleSheet.create({
         color:'white', 
         textAlign:'center', 
         fontWeight:'bold', 
-        fontSize:30,
+        fontSize:15,
     }
 });
 
-export default MoumTab; 
+export default PunctuationTab; 

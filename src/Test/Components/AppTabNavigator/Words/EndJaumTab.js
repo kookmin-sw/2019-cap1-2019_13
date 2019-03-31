@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
 
-class MoumTab extends React.Component{
+class EndJaumTab extends React.Component{
     render() {
         const {goBack} = this.props.navigation;
 
@@ -16,105 +16,71 @@ class MoumTab extends React.Component{
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
                         onPress={()=>this} style={styles.button}>
-                            <Text style={styles.text}>ㅏ</Text>
+                            <Text style={styles.text}>ㄱ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅑ</Text>
+                            <Text style={styles.text}>ㄴ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅓ</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection:'row' }}>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅕ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅗ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅛ</Text>
+                            <Text style={styles.text}>ㄷ</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅜ</Text>
+                            <Text style={styles.text}>ㄹ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅠ</Text>
+                            <Text style={styles.text}>ㅁ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅡ</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection:'row' }}>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅣ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅐ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅒ</Text>
+                            <Text style={styles.text}>ㅂ</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅔ</Text>
+                            <Text style={styles.text}>ㅅ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅖ</Text>
+                            <Text style={styles.text}>ㅇ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅘ</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection:'row' }}>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅙ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅚ</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅝ</Text>
+                            <Text style={styles.text}>ㅈ</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅞ</Text>
+                            <Text style={styles.text}>ㅊ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅟ</Text>
+                            <Text style={styles.text}>ㅋ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                         onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>ㅢ</Text>
+                            <Text style={styles.text}>ㅌ</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{ flexDirection:'row', width: 250 }}>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>ㅍ</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>this}  style={styles.button}>
+                            <Text style={styles.text}>ㅎ</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -137,15 +103,15 @@ const styles = StyleSheet.create({
         margin: 20,
     },
     syllables: {
+        marginTop: 70,
         marginLeft: 20,
-        marginRight: 20,
-        marginTop: 40
+        marginRight: 20
     },
     button: {
         borderRadius:20, 
         margin:10, 
         flex: 1,
-        height:55, 
+        height:65, 
         backgroundColor:'dodgerblue', 
         justifyContent:'center',
     }, 
@@ -157,4 +123,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MoumTab; 
+export default EndJaumTab; 

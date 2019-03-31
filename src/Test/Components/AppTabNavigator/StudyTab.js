@@ -5,15 +5,21 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import MenuTab from './Menu/MenuTab';
 import MoumTab from './Words/MoumTab';
-import JaumTab from './Words/JaumTab';
-import WordTab from './Words/WordTab';
+import InitialJaumTab from './Words/InitialJaumTab';
+import EndJaumTab from './Words/EndJaumTab';
+import AbbreviationTab from './Words/AbbreviationTab';
+import CategoryTab from './Words/CategoryTab';
+import PunctuationTab from './Words/PunctuationTab';
 
 const MainStack = createStackNavigator(
     {
-        Menu:{ screen: MenuTab },
-        Jaum:{ screen: JaumTab },
-        Moum:{ screen: MoumTab},
-        Word:{ screen: WordTab},
+        Menu: { screen: MenuTab },
+        InitialJaum: { screen: InitialJaumTab },
+        Moum: { screen: MoumTab },
+        EndJaum: { screen: EndJaumTab },
+        Abbreviation: { screen: AbbreviationTab },
+        Punctuation: { screen: PunctuationTab },
+        Category: { screen: CategoryTab },
     },
     {
         headerMode:'none',
