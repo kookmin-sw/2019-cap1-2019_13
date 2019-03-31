@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Alert, ImageBackground, TouchableOpacity } from 'react-native';
-import { Icon, Header, Body, Left, Right } from 'native-base';
-import HeaderBtn from '../Commons/HeaderBtn';
-import { Button } from 'react-native-elements';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { Icon } from 'native-base';
+import Speech from 'expo';
 
 export default class HomeTab extends Component {
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
-            <Icon name='ios-home' style={{ color: tintColor,  }} />
+            <Icon name='ios-home' style={{ color: tintColor }} />
         )
         
     }

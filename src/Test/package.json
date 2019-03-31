@@ -8,14 +8,18 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.1",
-    "expo": "^32.0.0",
+    "expo": "^32.0.6",
+    "expo-cli": "^2.14.0",
+    "expo-speech": "^4.0.0",
     "native-base": "^2.12.1",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-button": "^2.3.0",
     "react-native-elements": "^1.1.0",
+    "react-native-tts": "^2.0.0",
     "react-navigation": "^3.5.1",
-    "react-navigation-header-buttons": "^2.1.2"
+    "react-navigation-header-buttons": "^2.1.2",
+    "tts": "^0.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"

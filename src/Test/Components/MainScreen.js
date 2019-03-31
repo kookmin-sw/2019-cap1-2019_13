@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View,Alert, TouchableOpacity } from 'react-native';
-import { Icon, Button, Left } from 'native-base'; // 추가된 코드
+import { StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { Icon } from 'native-base'; // 추가된 코드
 import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'; 
-import HeaderBtn from './Commons/HeaderBtn';
+import Speech from 'expo';
+import Global from '../global';
 
 // 하단 탭에 들어갈 컴포넌트들
 import HomeTab from './AppTabNavigator/HomeTab';
@@ -34,21 +35,7 @@ const AppTabNavigator = createMaterialTopTabNavigator({
 });
 
 const AppTabContainet = createAppContainer(AppTabNavigator);
-_usestt=()=>{
-  //function to make two option alert
-  Alert.alert(
-      //title
-      '안녕하세요?',
-      //body
-      '음성인식 기능을 사용합니다.',
-      [
-      {text: 'OK', onPress: () => console.log('Yes Pressed')},
-      {text: 'Cancel', onPress: () => console.log('No Pressed'), style: 'cancel'},
-      ],
-      { cancelable: false }
-      //clicking out side of alert will not cancel
-  );
-}
+
 export default class MainScreen extends Component {
   // navigationOptions 코드 추가
   static navigationOptions = {
@@ -57,12 +44,12 @@ export default class MainScreen extends Component {
       <TouchableOpacity 
           onPress={()=>Alert.alert(
             //title
-            '안녕하세요!',
+            '음성안내',
             //body
-            '음성인식 기능을 사용할까요?',
+            '원하는 버튼을 눌러주세요',
             [
-            {text: 'OK', onPress: () => console.log('Active Stt')},
-            {text: 'Cancel', onPress: () => console.log('Inactive Stt'), style: 'cancel'},
+            {text: '켜기', onPress: () => Global.status=true},
+            {text: '끄기', onPress: () => Global.status=false, style: 'cancel'},
             ],
             { cancelable: false }
             //clicking out side of alert will not cancel
