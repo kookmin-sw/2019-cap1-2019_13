@@ -15,7 +15,7 @@ class CategoryTab extends React.Component{
                 <View style={styles.menuContainer}>
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this} style={styles.button}>
+                        onPress={()=>this.props.navigation.navigate('Color')} style={styles.button}>
                             <Icon name="md-brush"/>
                             <Text style={styles.textInButton}>색깔</Text>
                         </TouchableOpacity>
@@ -23,7 +23,7 @@ class CategoryTab extends React.Component{
 
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this} style={styles.button}>
+                        onPress={()=>this.props.navigation.navigate('Sports')} style={styles.button}>
                             <Icon name="logo-dribbble"/>
                             <Text style={styles.textInButton}>스포츠</Text>
                         </TouchableOpacity>
@@ -31,35 +31,34 @@ class CategoryTab extends React.Component{
 
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this} style={styles.button}>
+                        onPress={()=>this.props.navigation.navigate('Number')} style={styles.button}>
                             <Icon name="md-stopwatch"/>
                             <Text style={styles.textInButton}>숫자</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this} style={styles.button}>
+                        onPress={()=>this.props.navigation.navigate('Weekday')} style={styles.button}>
                             <Icon name="md-calendar"/>
                             <Text style={styles.textInButton}>요일</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this} style={styles.button}>
+                        onPress={()=>this.props.navigation.navigate('Season')} style={styles.button}>
                             <Icon name="md-partly-sunny"/>
                             <Text style={styles.textInButton}>계절</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this} style={styles.button}>
+                        onPress={()=>this.props.navigation.navigate('Animal')} style={styles.button}>
                             <Icon name="md-paw"/>
                             <Text style={styles.textInButton}>동물</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
-            
         );
     }
 }

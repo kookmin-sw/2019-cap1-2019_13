@@ -11,6 +11,13 @@ import AbbreviationTab from './Words/AbbreviationTab';
 import CategoryTab from './Words/CategoryTab';
 import PunctuationTab from './Words/PunctuationTab';
 
+import AnimalCategory from './CategoryStudy/AnimalCategory';
+import ColorCategory from './CategoryStudy/ColorCategory';
+import NumberCategory from './CategoryStudy/NumberCategory';
+import SeasonCategory from './CategoryStudy/SeasonCategory';
+import SportsCategory from './CategoryStudy/SportsCategory';
+import WeekdayCategory from './CategoryStudy/WeekdayCategory';
+
 const MainStack = createStackNavigator(
     {
         Menu: { screen: MenuTab },
@@ -20,6 +27,13 @@ const MainStack = createStackNavigator(
         Abbreviation: { screen: AbbreviationTab },
         Punctuation: { screen: PunctuationTab },
         Category: { screen: CategoryTab },
+
+        Animal: { screen: AnimalCategory },
+        Color: { screen: ColorCategory },
+        Number: { screen: NumberCategory },
+        Season: { screen: SeasonCategory },
+        Sports: { screen: SportsCategory },
+        Weekday: { screen: WeekdayCategory },
     },
     {
         headerMode:'none',
