@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
+import { Speech } from 'expo';
 
 class CategoryTab extends React.Component{
     render() {
@@ -9,13 +10,13 @@ class CategoryTab extends React.Component{
         return (
             <View style={styles.container}>
                 <View style={styles.goback}> 
-                    <Icon name="md-arrow-round-back" onPress={()=>goBack()}/>
+                    <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Speech.speak("뒤로가기", { language: 'ko', rate: 0.75});}}/>
                 </View>
 
                 <View style={styles.menuContainer}>
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this.props.navigation.navigate('Color')} style={styles.button}>
+                        onPress={()=>{this.props.navigation.navigate('Color'); Speech.speak("색깔 배우기", { language: 'ko', rate: 0.75});}} style={styles.button}>
                             <Icon name="md-brush"/>
                             <Text style={styles.textInButton}>색깔</Text>
                         </TouchableOpacity>
@@ -23,7 +24,7 @@ class CategoryTab extends React.Component{
 
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this.props.navigation.navigate('Sports')} style={styles.button}>
+                        onPress={()=>{this.props.navigation.navigate('Sports'); Speech.speak("스포츠 배우기", { language: 'ko', rate: 0.75});}} style={styles.button}>
                             <Icon name="logo-dribbble"/>
                             <Text style={styles.textInButton}>스포츠</Text>
                         </TouchableOpacity>
@@ -31,28 +32,28 @@ class CategoryTab extends React.Component{
 
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this.props.navigation.navigate('Number')} style={styles.button}>
+                        onPress={()=>{this.props.navigation.navigate('Number'); Speech.speak("숫자 배우기", { language: 'ko', rate: 0.75});}} style={styles.button}>
                             <Icon name="md-stopwatch"/>
                             <Text style={styles.textInButton}>숫자</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this.props.navigation.navigate('Weekday')} style={styles.button}>
+                        onPress={()=>{this.props.navigation.navigate('Weekday'); Speech.speak("요일 배우기", { language: 'ko', rate: 0.75});}} style={styles.button}>
                             <Icon name="md-calendar"/>
                             <Text style={styles.textInButton}>요일</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this.props.navigation.navigate('Season')} style={styles.button}>
+                        onPress={()=>{this.props.navigation.navigate('Season'); Speech.speak("계절 배우기", { language: 'ko', rate: 0.75});}} style={styles.button}>
                             <Icon name="md-partly-sunny"/>
                             <Text style={styles.textInButton}>계절</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity 
-                        onPress={()=>this.props.navigation.navigate('Animal')} style={styles.button}>
+                        onPress={()=>{this.props.navigation.navigate('Animal'); Speech.speak("동물 배우기", { language: 'ko', rate: 0.75});}} style={styles.button}>
                             <Icon name="md-paw"/>
                             <Text style={styles.textInButton}>동물</Text>
                         </TouchableOpacity>

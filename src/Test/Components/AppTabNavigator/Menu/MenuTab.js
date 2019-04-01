@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { Speech } from 'expo';
 
 class MenuTab extends React.Component{
     render() {
@@ -7,39 +8,39 @@ class MenuTab extends React.Component{
             <View style={ styles.container }>
                 <View>
                     <TouchableOpacity 
-                    onPress={()=>this.props.navigation.navigate('InitialJaum')} style={styles.button}>
+                    onPress={()=>{this.props.navigation.navigate('InitialJaum'); Speech.speak("초성자음 배우기", { language: "ko" });}} style={styles.button}>
                         <Text style={styles.textInButton}>초성자음</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View>
                     <TouchableOpacity 
-                    onPress={()=>this.props.navigation.navigate('Moum')} style={styles.button}>
+                    onPress={()=>{this.props.navigation.navigate('Moum'); Speech.speak("모음 배우기", { language: "ko" });}} style={styles.button}>
                         <Text style={styles.textInButton}>모음</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View>
                     <TouchableOpacity 
-                    onPress={()=>this.props.navigation.navigate('EndJaum')} style={styles.button}>
+                    onPress={()=>{this.props.navigation.navigate('EndJaum'); Speech.speak("종성자음 배우기", { language: "ko" });}} style={styles.button}>
                         <Text style={styles.textInButton}>종성자음</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
                     <TouchableOpacity 
-                    onPress={()=>this.props.navigation.navigate('Abbreviation')} style={styles.button}>
+                    onPress={()=>{this.props.navigation.navigate('Abbreviation'); Speech.speak("약어 배우기", { language: "ko" });}} style={styles.button}>
                         <Text style={styles.textInButton}>약어</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
                     <TouchableOpacity 
-                    onPress={()=>this.props.navigation.navigate('Punctuation')} style={styles.button}>
+                    onPress={()=>{this.props.navigation.navigate('Punctuation'); Speech.speak("문장부호 배우기", { language: "ko" });}} style={styles.button}>
                         <Text style={styles.textInButton}>문장부호</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
                     <TouchableOpacity 
-                    onPress={()=>this.props.navigation.navigate('Category')} style={styles.button}>
+                    onPress={()=>{this.props.navigation.navigate('Category'); Speech.speak("카테고리로 배우기", { language: "ko" });}} style={styles.button}>
                         <Text style={styles.textInButton}>카테고리</Text>
                     </TouchableOpacity>
                 </View>

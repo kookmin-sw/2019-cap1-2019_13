@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
+import { Speech } from 'expo';
 
 class EndJaumTab extends React.Component{
     render() {
@@ -9,77 +10,77 @@ class EndJaumTab extends React.Component{
         return (
             <View style={ styles.container }>
                 <View style={styles.goback}> 
-                    <Icon name="md-arrow-round-back" onPress={()=>goBack()}/>
+                    <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Speech.speak("뒤로가기", { language: 'ko', rate: 0.75 });}}/>
                 </View>
 
                 <View style={styles.syllables}>
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this} style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㄱ", { language: "ko", rate : 0.75 });}} style={styles.button}>
                             <Text style={styles.text}>ㄱ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㄴ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㄴ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㄷ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㄷ</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㄹ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㄹ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅁ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅁ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅂ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅂ</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅅ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅅ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅇ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅇ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅈ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅈ</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅊ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅊ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅋ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅋ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅌ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅌ</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row', width: 250 }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅍ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅍ</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("ㅎ", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>ㅎ</Text>
                         </TouchableOpacity>
                     </View>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions  } from 'react-native';
 import { Icon } from 'native-base';
+import { Speech } from 'expo';
 
 const { height } = Dimensions.get('window');
 
@@ -20,148 +21,141 @@ class PunctuationTab extends React.Component{
         return (
             <ScrollView style={ styles.container }>
                 <View style={styles.goback}> 
-                    <Icon name="md-arrow-round-back" onPress={()=>goBack()}/>
+                    <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Speech.speak("뒤로가기", { language: 'ko', rate: 0.75 });}}/>
                 </View>
 
                 <View style={styles.syllables}>
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this} style={styles.button}>
+                        onPress={()=>{this; Speech.speak("여는 큰따옴표", { language: "ko", rate : 0.75 });}} style={styles.button}>
                             <Text style={styles.text}>여는큰따옴표(“)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("닫는 큰따옴표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>닫는큰따옴표(”)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("여는 작은따옴표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>여는작은따옴표(‘)</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("닫는 작은따옴표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>닫는작은따옴표(’)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("물결표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>물결표(~)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("가운데점 줄임표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>줄임표(•••)</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("밑에점 줄임표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>줄임표(…)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("느낌표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>느낌표(!)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("마침표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>마침표(.)</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("쉼표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>쉼표(,)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("물음표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>물음표(?)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("쌍점", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>쌍점(:)</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("쌍반점", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>쌍반점(;)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("붙임표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>붙임표(-)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("참고표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>참고표(※)</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("여는 소괄호", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>여는소괄호 (</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("닫는 소괄호", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>닫는소괄호 )</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("여는 중괄호", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>여는중괄호 {'\{'}</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("닫는 중괄호", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>닫는중괄호 {'\}'}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>닫는소괄호 )</Text>
+                        onPress={()=>{this; Speech.speak("여는 대괄호", { language: "ko", rate : 0.75 });}}  style={styles.button}>
+                            <Text style={styles.text}>여는대괄호 [</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>여는대괄호 [</Text>
+                        onPress={()=>{this; Speech.speak("닫는 대괄호", { language: "ko", rate : 0.75 });}}  style={styles.button}>
+                            <Text style={styles.text}>닫는대괄호 ]</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>닫는대괄호 ]</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("가운뎃점", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>가운뎃점( · )</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("여는 홑화살괄호 또는 여는 홑낫표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>{'\<'} 또는 「</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={()=>{this; Speech.speak("닫는 홑화살괄호 또는 닫는 홑낫표", { language: "ko", rate : 0.75 });}}  style={styles.button}>
+                            <Text style={styles.text}>{'\>'} 또는 」</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ flexDirection:'row' }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
-                            <Text style={styles.text}>{'\>'} 또는 」</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("여는 겹낫표 또는 여는 겹화살괄호", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>『 또는 《</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("닫는 겹낫표 또는 닫는 겹화살괄호", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>』 또는 》</Text>
                         </TouchableOpacity>
-                    </View>
-
-                    <View style={{ flexDirection:'row', width: 125 }}>
                         <TouchableOpacity 
-                        onPress={()=>this}  style={styles.button}>
+                        onPress={()=>{this; Speech.speak("빗금", { language: "ko", rate : 0.75 });}}  style={styles.button}>
                             <Text style={styles.text}>빗금(/)</Text>
                         </TouchableOpacity>
                     </View>
