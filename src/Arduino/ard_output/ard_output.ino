@@ -1,57 +1,101 @@
 
 #include <SoftwareSerial.h>
+#include <stdlib.h>
+int SolenoidOne = 11;
+int SolenoidTwo = 12;
+int Switch = 9;
+char SolOneStatus =LOW;
+char SolTwoStatus =LOW; 
+SoftwareSerial BTSerial(2, 3);   //bluetooth module Tx:Digital 2 Rx:Digital 3
+String readSerial()   
+{   
+   String str = "";   
+   char ch;   
 
-// SoftwareSerial(RX, TX), RX,TX는 핀번호
-SoftwareSerial BTSerial(2, 3); 
-// Solenoid모터 핀번호
-int solenoidMotor[6] = {0,1,2,3,4,5};
-// 스마트폰에서 받을 점자데이터를 저장할 배열
-int dotArray[6];
+    while( Serial.available() > 0 )   
+    {   
+      ch = Serial.read();   
+      str.concat(ch);   
+      delay(10);  
+    }   
+    return str;     
+}   
 
 void setup() {
-  // put your setup code here, to run once:
-  BTSerial.begin(9600); 
-  // 솔레노이드모터 연결
-  for(int j = 0; j < 6; j ++)
-    pinMode(solenoidMotor[j], OUTPUT);
-  for(int i = 0; i < 6; i ++)
-    dotArray[i] = 0;
 
+  Serial.begin(9600);
+  BTSerial.begin(9600);
+  pinMode(SolenoidOne, OUTPUT);
+  pinMode(SolenoidTwo, OUTPUT);
+  pinMode(Switch,INPUT_PULLUP);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  if (BTSerial.available()){ // 블루투스로 데이터 수신
-    dotReceive();
-    delay(500);
-    dotPrint();
-  }
-
-}
-
-// 하드웨어에 점자 출력
-void dotPrint(){
-  for(int i = 0; i < 6; i ++)
+  //if (BTSerial.available())
+  //{
+  //  Serial.print(BTSerial.read());
+  //}
+  String str;
+  digitalWrite(SolenoidOne, SolOneStatus);
+  digitalWrite(SolenoidTwo, SolTwoStatus);
+  str = readSerial();
+  if(str == "");
+  else if(str=="ssss")
   {
-    if(dotArray[i]>0)
-      digitalWrite(solenoidMotor[dotArray[i]], HIGH); 
-    
+    Serial.println(str);
+    Serial.println("Solenoid One UP");
+    SolOneStatus = HIGH;
   }
-}
-
-// 하드웨어 점자 리셋
-void dotReset(){
-  for(int i = 0; i < 6; i ++)
+  else if(str=="s2 up")
   {
-    if(dotArray[i]>0)
+    Serial.println(str);
+    Serial.println("Solenoid Two UP");
+    SolTwoStatus = HIGH;
+  }
+  else if(str=="3")
+  {
+    Serial.println(str);
+    Serial.println("Solenoid One & Two UP");
+    SolOneStatus = HIGH;
+    SolTwoStatus = HIGH;
+  }
+  else if(str=="4")
+  {
+    Serial.println(str);
+    Serial.println("Solenoid One DOWN");
+    SolOneStatus = LOW;
+  }
+  else if(str=="5")
+  {
+    Serial.println(str);
+    Serial.println("Solenoid Two DOWN");
+    SolTwoStatus = LOW;
+  }
+  else
+  {
+    Serial.println(str);
+    Serial.println("error!");
+  }
+  /*
+  if (Serial.available())
+  {
+    char val;
+    val = BTSerial.read();
+    Serial.print(val);
+    if(val=='a')
     {
-      digitalWrite(solenoidMotor[dotArray[i]], LOW); 
-      dotArray[i] = 0;
+      digitalWrite(Switch,HIGH);
     }
+    BTSerial.write(Serial.read());
   }
-}
-
-// 스마트폰에서 점자데이터 수신
-void dotReceive(){
-
+  if(digitalRead(Switch)==LOW)
+  {
+    digitalWrite(Switch,HIGH);
+    delay(100);
+  }
+  else
+  {
+    digitalWrite(11,LOW);
+    delay(100);
+  }*/
 }
