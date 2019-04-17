@@ -1,9 +1,17 @@
 #include <SoftwareSerial.h>
 
-int SolenoidOne = 11;
-int SolenoidTwo = 12;
+int SolenoidOne = 9;
+int SolenoidTwo = 10;
+int SolenoidThree = 11;
+int SolenoidFour = 12;
+int SolenoidFive = 13;
+int SolenoidSix = 14;
 char SolOneStatus = LOW;
 char SolTwoStatus = LOW; 
+char SolThreeStatus = LOW;
+char SolFourStatus = LOW; 
+char SolFiveStatus = LOW;
+char SolSixStatus = LOW; 
 int Tx = 2;
 int Rx = 3;
 int Bluetooth = 0;
@@ -14,14 +22,24 @@ void setup() {
   BTSerial.begin(9600); //블루투스 통신 시작
   pinMode(SolenoidOne, OUTPUT); 
   pinMode(SolenoidTwo, OUTPUT);
+  pinMode(SolenoidThree, OUTPUT); 
+  pinMode(SolenoidFour, OUTPUT);
+  pinMode(SolenoidFive, OUTPUT); 
+  pinMode(SolenoidSix, OUTPUT);
 }
 
 void loop() {
+  
   String str;
   digitalWrite(SolenoidOne, SolOneStatus);
   digitalWrite(SolenoidTwo, SolTwoStatus);
+  digitalWrite(SolenoidThree, SolThreeStatus);
+  digitalWrite(SolenoidFour, SolFourStatus);
+  digitalWrite(SolenoidFive, SolFiveStatus);
+  digitalWrite(SolenoidSix, SolSixStatus);
   if (BTSerial.available())
   {
+   
     if(!Bluetooth)
     {
       Serial.println("Bluetooth connected");
@@ -36,40 +54,99 @@ void loop() {
   else if(str=="1")
   {
     SolOneStatus = HIGH;
+   
     Serial.println(str);
     Serial.println("Solenoid 1 UP");
   }
   else if(str=="2")
   {
     SolTwoStatus = HIGH;
+    
     Serial.println(str);
     Serial.println("Solenoid 2 UP");
   }
+  
   else if(str=="3")
+  {
+    SolThreeStatus = HIGH;
+    Serial.println(str);
+    Serial.println("Solenoid 3 UP");
+  }
+  else if(str=="4")
+  {
+    SolFourStatus = HIGH;
+    Serial.println(str);
+    Serial.println("Solenoid 4 UP");
+  }
+  else if(str=="5")
+  {
+    SolFiveStatus = HIGH;
+    Serial.println(str);
+    Serial.println("Solenoid 5 UP");
+  }
+  else if(str=="6")
+  {
+    SolSixStatus = HIGH;
+    Serial.println(str);
+    Serial.println("Solenoid 6 UP");
+  }
+  else if(str=="0")
   {
     SolOneStatus = HIGH;
     SolTwoStatus = HIGH;
+    SolThreeStatus = HIGH;
+    SolFourStatus = HIGH;
+    SolFiveStatus = HIGH;
+    SolSixStatus = HIGH;
     Serial.println(str);
-    Serial.println("Solenoid 1 & 2 UP");
+    Serial.println("Solenoid All UP");
   }
-  else if(str=="4")
+  else if(str=="a")
   {
     SolOneStatus = LOW;
     Serial.println(str);
     Serial.println("Solenoid 1 DOWN");
   }
-  else if(str=="5")
+  else if(str=="b")
   {
     SolTwoStatus = LOW;
     Serial.println(str);
     Serial.println("Solenoid 2 DOWN");
   }
-  else if(str=="6")
+  else if(str=="c")
+  {
+    SolThreeStatus = LOW;
+    Serial.println(str);
+    Serial.println("Solenoid 3 DOWN");
+  }
+  else if(str=="d")
+  {
+    SolFourStatus = LOW;
+    Serial.println(str);
+    Serial.println("Solenoid 4 DOWN");
+  }
+  else if(str=="e")
+  {
+    SolFiveStatus = LOW;
+    Serial.println(str);
+    Serial.println("Solenoid 5 DOWN");
+  }
+  else if(str=="f")
+  {
+    SolSixStatus = LOW;
+    Serial.println(str);
+    Serial.println("Solenoid 6 DOWN");
+  }
+  else if(str=="g")
   {
     SolOneStatus = LOW;
     SolTwoStatus = LOW;
+    SolThreeStatus = LOW;
+    SolFourStatus = LOW;
+    SolFiveStatus = LOW;
+    SolSixStatus = LOW;
     Serial.println(str);
-    Serial.println("Solenoid 1 & 2 DOWN");
+    Serial.println("Solenoid All DOWN");
   }
   else
   {
@@ -80,12 +157,12 @@ void loop() {
 
 String readSerial()   
 {   
-   String str = "";   
+   String strr = "";   
    char ch;   
    while( BTSerial.available() > 0 )   
    {   
       ch = BTSerial.read();   
-      str.concat(ch); 
+      strr.concat(ch); 
    }  
-   return str;     
+   return strr;     
 }
