@@ -1,11 +1,11 @@
 #include <SoftwareSerial.h>
 
-int SolenoidOne = 9;
-int SolenoidTwo = 10;
-int SolenoidThree = 11;
-int SolenoidFour = 12;
-int SolenoidFive = 13;
-int SolenoidSix = 14;
+int SolenoidOne = 8;
+int SolenoidTwo = 9;
+int SolenoidThree = 10;
+int SolenoidFour = 11;
+int SolenoidFive = 12;
+int SolenoidSix = 13;
 char SolOneStatus = LOW;
 char SolTwoStatus = LOW; 
 char SolThreeStatus = LOW;
