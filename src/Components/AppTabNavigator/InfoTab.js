@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
+import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
+
 
 export default class InfoTab extends Component {
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
-            <Icon name='person' style={{ color: tintColor, }} />
+            <Icon name='md-repeat' style={{ color: tintColor, }} />
         )
     }
 
     render() {
         return (
             <View style={style.container}>
-                <Text style={{fontSize:40, marginBottom:50, fontWeight:'bold'}}>INFO</Text>
-                <Text style={{fontSize:30, marginBottom:30}}>2019 캡스톤 디자인 13조</Text>
-                <Text style={{fontSize:30, marginBottom:10}}>팀장 김채은</Text>
-                <Text style={{fontSize:30, marginBottom:10}}>팀원 김세훈</Text>
-                <Text style={{fontSize:30, marginBottom:10}}>팀원 김윤성</Text>
-                <Text style={{fontSize:30, marginBottom:10}}>팀원 이준영</Text>
-                <Text style={{fontSize:30, marginBottom:100}}>팀원 장예은</Text>
+                <TouchableOpacity style={style.resetbutton}><Text>Reset</Text></TouchableOpacity>
                 
-                <Text style={{fontSize:20}}>Copyright ⓒ 2019, UmjiSongarak Corp.</Text>
+                <TextInput style={style.textbox} placeholder="점자로 알고싶은 글자를 입력하세요."></TextInput>
+                <TouchableOpacity style={style.inputdone}><Text>입력완료</Text></TouchableOpacity>
             </View>
         );
     }
@@ -31,6 +28,37 @@ const style = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#6effbf',
+        backgroundColor: 'white',
+    },
+    resetbutton: {
+        borderWidth: 1,
+        borderRadius: 3,
+        backgroundColor: '#ffcc99',
+        margin: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        width: 50,
+        height: 30,
+        
+    },
+    inputdone: {
+        borderWidth: 1,
+        borderRadius: 3,
+        width: 120,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#3f51b5',
+        color: 'white',
+        margin: 30,
+    }, 
+    textbox: {
+        borderWidth: 1,
+        borderRadius: 2,
+        width: 230,
+        height: 30,
+        margin: 10,
+        padding: 5,
     }
 });

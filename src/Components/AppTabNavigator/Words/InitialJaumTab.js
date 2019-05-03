@@ -7,7 +7,6 @@ class InitialJaumTab extends React.Component{
     render() {
         const {goBack} = this.props.navigation;
         
-
         return (
             <View style={ styles.container }>
                 <View style={styles.goback}> 
