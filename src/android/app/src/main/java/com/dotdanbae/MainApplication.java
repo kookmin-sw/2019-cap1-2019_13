@@ -3,6 +3,8 @@ package com.dotdanbae;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import it.innove.BleManagerPackage;
+import it.innove.BleManagerPackage;
 import com.rusel.RCTBluetoothSerial.RCTBluetoothSerialPackage;
 import net.no_mad.tts.TextToSpeechPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BleManagerPackage(),
+            new BleManagerPackage(),
             new RCTBluetoothSerialPackage(),
             new TextToSpeechPackage(),
             new RNGestureHandlerPackage()

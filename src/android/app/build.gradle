@@ -138,6 +138,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-ble-connect')
+    implementation project(':react-native-ble-manager')
     implementation project(':react-native-bluetooth-serial')
     implementation project(':react-native-tts')
     implementation project(':react-native-gesture-handler')

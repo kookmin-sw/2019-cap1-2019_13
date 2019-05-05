@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, NativeAppEventEmitter, Button, ListView } from 'react-native';
 import { Icon } from 'native-base';
 import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
 
@@ -15,7 +15,6 @@ export default class InfoTab extends Component {
         return (
             <View style={style.container}>
                 <TouchableOpacity style={style.resetbutton}><Text>Reset</Text></TouchableOpacity>
-                
                 <TextInput style={style.textbox} placeholder="점자로 알고싶은 글자를 입력하세요."></TextInput>
                 <TouchableOpacity style={style.inputdone}><Text>입력완료</Text></TouchableOpacity>
             </View>
