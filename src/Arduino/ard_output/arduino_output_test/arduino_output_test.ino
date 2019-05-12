@@ -1,45 +1,42 @@
 #include <SoftwareSerial.h>
 
-int SolenoidOne = 8;
-int SolenoidTwo = 9;
-int SolenoidThree = 10;
-int SolenoidFour = 11;
-int SolenoidFive = 12;
-int SolenoidSix = 13;
-char SolOneStatus = LOW;
-char SolTwoStatus = LOW; 
-char SolThreeStatus = LOW;
-char SolFourStatus = LOW; 
-char SolFiveStatus = LOW;
-char SolSixStatus = LOW; 
+int LeftSolenoid[6]={4,5,6,7,8,9};
+int RightSolenoid[6]={10,11,12,13,14,15};
+
+char LeftSol_Status[6]={LOW};
+char RightSol_Status[6]={LOW};
+
+int DataLength = 0;
 int Tx = 2;
 int Rx = 3;
 int Bluetooth = 0;
 SoftwareSerial BTSerial(Tx, Rx);   //bluetooth module Tx:Digital 2 Rx:Digital 3   
 
 void setup() {
-  Serial.begin(9600); //시리얼 통신 시작
   BTSerial.begin(9600); //블루투스 통신 시작
-  pinMode(SolenoidOne, OUTPUT); 
-  pinMode(SolenoidTwo, OUTPUT);
-  pinMode(SolenoidThree, OUTPUT); 
-  pinMode(SolenoidFour, OUTPUT);
-  pinMode(SolenoidFive, OUTPUT); 
-  pinMode(SolenoidSix, OUTPUT);
+  Serial.begin(9600); //시리얼 통신 시작
+  Bluetooth = 0;
+  DataLength = 0;
+  for(int i = 0; i < 6; i++) //핀연결, 모터 상태 초기화
+  {
+    pinMode(LeftSolenoid[i],OUTPUT);
+    pinMode(RightSolenoid[i],OUTPUT);
+    LeftSol_Status[i] = LOW;
+    RightSol_Status[i] = LOW;
+  }
 }
 
 void loop() {
-  
+
   String str;
-  digitalWrite(SolenoidOne, SolOneStatus);
-  digitalWrite(SolenoidTwo, SolTwoStatus);
-  digitalWrite(SolenoidThree, SolThreeStatus);
-  digitalWrite(SolenoidFour, SolFourStatus);
-  digitalWrite(SolenoidFive, SolFiveStatus);
-  digitalWrite(SolenoidSix, SolSixStatus);
-  if (BTSerial.available())
+  for(int i = 0; i < 6; i++) //상태 업데이트
   {
-   
+    digitalWrite(LeftSolenoid[i], LeftSol_Status[i]);
+    digitalWrite(RightSolenoid[i], RightSol_Status[i]);
+  }
+
+  if (BTSerial.available())
+  {   
     if(!Bluetooth)
     {
       Serial.println("Bluetooth connected");
@@ -47,9 +44,10 @@ void loop() {
     }
     str = readSerial();
   }
+
   if(str == "")
   {
-    //Serial.println("empty string");  
+
   }
   else if(str=="1")
   {
