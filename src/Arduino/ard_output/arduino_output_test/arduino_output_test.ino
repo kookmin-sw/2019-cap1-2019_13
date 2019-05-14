@@ -7,9 +7,9 @@ int DataArray[55]={0};
 char LeftSol_Status[6]={LOW};
 char RightSol_Status[6]={LOW};
 
-int DataLength = 0;
 int Tx = 2;
 int Rx = 3;
+int DataLength = 0;
 int Bluetooth = 0;
 
 SoftwareSerial BTSerial(Tx, Rx);   //bluetooth module Tx:Digital 2 Rx:Digital 3   
@@ -29,8 +29,7 @@ void setup() {
 }
 
 void loop() {
-
-  String DotData;
+  String DotData = "";
   for(int i = 0; i < 6; i++) //상태 업데이트
   {
     digitalWrite(LeftSolenoid[i], LeftSol_Status[i]);
@@ -45,8 +44,9 @@ void loop() {
       Bluetooth = 1;
     }
     DotData = ReceiveDot();
+    StoreDot(DotData,DataLength);
+    PrintDot(DataLength);
   }
-  StoreDot(DotData,DataLength);
 
 }
 
@@ -73,10 +73,25 @@ void StoreDot(String Ddata, int Dlength)
   }
 }
 
-void PrintDot()
+void PrintDot(int Dlength)
 {
+  int DotSet = Dlength;
+  for(int i = 0; i < DotSet; i++)
+  {
+    for(int i = 0; i < 6; i++)
+    {
+      if(DotSet/2==0 && DotSet!=0)
+      {
+        digitalWrite()
+      }
+      else if(DotSet/2==1 && DotSet!=0)
+      {
 
-
+      }
+    }
+    DotSet -= 1;
+    delay(1500);
+  }
 }
 
 void Reset()
