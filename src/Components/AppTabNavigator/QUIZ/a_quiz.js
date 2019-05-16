@@ -1,6 +1,6 @@
-﻿import React ,{Component} from 'react';
+﻿import React , {Component}  from 'react';
 
-import { AppRegistry,Image, View, Text ,Alert,Button} from 'react-native';
+import {AppRegistry,Image, View, Text ,Alert,Button} from 'react-native';
 
 import {TouchableOpacity,StyleSheet,TouchableHighlight} from 'react-native';
 
@@ -8,156 +8,196 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import Tts from 'react-native-tts';
 
+import Voice from 'react-native-voice';
 
 
-export default class  a_quiz extends Component  {
 
-  state = {
+export default class a_quiz extends Component {
 
-      togglee:true,
 
-      togglee2:true,
+    constructor(props) {
 
-      togglee3:true
+        super(props);
 
-      }
+        this.state = { recognized: '', started: '', results: [], partialResults: [], };
 
-  press(){  
 
-    const newb=!this.state.togglee;
 
-    this.setState({togglee : newb}) 
+        Tts.speak("자음퀴즈입니다 초성ㄱ은 몇번인가요?",{language:"ko"});
 
-    }
+        Voice.onSpeechStart = this.onSpeechStart.bind(this);
 
-  press2(){
+        Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
 
-    const newb2=!this.state.togglee2;
+        Voice.onSpeechResults = this.onSpeechResults.bind(this);
 
-    this.setState({togglee2 : newb2}) 
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults;
 
     }
 
-  press3(){
+    componentWillUnmount() {
 
-    const newb3=!this.state.togglee3;
-
-    this.setState({togglee3 : newb3}) 
+        Voice.destroy().then(Voice.removeAllListeners);
 
     }
 
-  render() {
+    onSpeechStart(e) {
 
-    const { togglee }  = this.state; 
+        this.setState({
 
-    const { togglee2 }  = this.state;
+            started: '√',
 
-    const { togglee3 }  = this.state;
+        });
+
+    };
+
+    onSpeechRecognized(e) {
+
+        this.setState({
+
+            recognized: '√',
+
+        });
+
+    };
+
+    onSpeechResults(e) {
+
+        this.setState({
+
+            results: e.value,
+
+        });
+
+    }
+
+    onSpeechPartialResults = e => {
+
+        this.setState({
+
+            partialResults: e.value,
+
+        });
+
+    };
+
+    async _startRecognition(e) {
+
+        this.setState({
+
+            recognized: '',
+
+            started: '',
+
+            results: [],
+
+            partialResults: [],
+
+        });
+
+        try {
+
+            await Voice.start('ko-KR');  
+
+            
+
+        } catch (e) {
+
+            console.error(e);
+
+        }
+
+    }
+
+    
+
+    render() {
+
+
+        return (
 
 
 
-    const checkchange = togglee?"orange" : 'blue';   
-
-    const checkchange2 = togglee2?"orange" : 'blue';
-
-    const checkchange3 = togglee3?"orange" : 'blue';       
-
-    const number1check = togglee? "1번선택" : '선택취소'
-
-    const number2check = togglee2? "2번선택" : '선택취소'
-
-    const number3check = togglee3? "3번선택" : '선택취소'
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor :'bisque'  }}>
 
 
+           {this.state.partialResults.map((result, index) => {
+
+               return (
+
+               <Text key={`partial-result-${index}`} >{result == "문제"?  Tts.speak("자음퀴즈입니다. 초성 'ㄱ'은 무엇인가요?",{language:"ko"}):''}{result == "다음"? this.props.navigation.navigate('a_quiz_two') :''}
+
+       {result == "정답"? Tts.speak("정답은 1번입니다.",{language:"ko"}):''}{result == "시작"? this.props.navigation.navigate('quizstart'):''}
+
+                </Text>);})}
+
+       <TouchableOpacity style={{ flex: 1 }}  onPress={() => {this._startRecognition(); }}>
+
+           <TouchableOpacity style={{backgroundColor:'orange',borderRadius: 5 ,top:70,position: 'absolute',left:-80}}
+
+                         onPress={() => {this._startRecognition(); }} >
+
+                        <Text style ={{fontSize:30,color:'white'}}>문제듣기 </Text>
+          </TouchableOpacity>
 
 
 
+          <TouchableOpacity style={{backgroundColor:'orange',borderRadius: 5 ,top:70,position: 'absolute',right:-80}}
+                         
+                        onPress={() => {this._startRecognition(); }} >
+                        
+                        <Text style ={{fontSize:30,color:'white'}}>다음문제 </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{backgroundColor:'black',borderRadius: 5 , margin:50,padding:15,bottom:10}}
+
+                        onPress={() => {this._startRecognition(); }} >
+
+                        <Text style ={{fontSize:30,color:'white'}}>QUIZ! </Text>
+          </TouchableOpacity>
 
 
-    return (
+          <TouchableOpacity  style={{ backgroundColor:'orange',position: 'absolute',top:230,margin:60,padding:30,borderRadius: 10,left:-120}} 
+                        
+                        onPress={() => {this._startRecognition(); }}>
 
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' , margin:10,backgroundColor : 'bisque'}}>
+                        <Text style ={{fontSize:70,color:'white' }}>1</Text>
+         </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => Tts.speak("초성 'ㄱ'은 무엇인가요?",{language:"ko"})}style={{backgroundColor:'orange',position: 'absolute',top:40,left:10,borderRadius: 5 }}>
+         <Text style = {{fontSize:40}}>초성 "ㄱ"는? </Text> 
 
-          <Text
+         <TouchableOpacity style={{backgroundColor:'orange', margin:60,padding:30,bottom:5, borderRadius: 10}}
+                        
+                        onPress={() => {this._startRecognition(); }} >
 
-          style ={{fontSize:30,color:'white'}}>문제듣기</Text>
-
+                        <Text style ={{fontSize:70,color:'white'}}>2</Text>
         </TouchableOpacity>
-
-        <Text
-
-          style={{padding: 10,fontSize: 40,fontWeight: 'bold',position: 'absolute',top: 20,  }}>
-
-          QUIZ!</Text>
-
-        <TouchableOpacity   onPress={() => {this.props.navigation.navigate('a_quiz_two'); Tts.speak("다음문제",{language:"ko"});}} style={{backgroundColor:'orange',position: 'absolute',top:40,right:10,borderRadius: 5 }}>
-
-          <Text
-
-          style ={{fontSize:30,color:'white'}}>다음문제</Text>
-
-        </TouchableOpacity>
-
-        <Text style = {{fontSize:40,position:'absolute',top:170,}}>
-
-        초성 "ㄱ"는? 
-
-        </Text> 
-
-       <TouchableOpacity onPress={()=>{this.press(); Tts.speak(number1check,{language:"ko"});}} style={{ backgroundColor:checkchange, position: 'absolute',left:60,paddingTop:10, paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10}}>
-
-          <Text style ={{fontSize:20,color:'white' }}>1</Text>
-
-        </TouchableOpacity>
-
-       
-
-       <TouchableOpacity onPress={()=>{this.press2(); Tts.speak(number2check,{language:"ko"});}}  style={{backgroundColor:checkchange2,position: 'absolute', alignItems :'center', paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10}}>
-
-          <Text style ={{fontSize:20,color:'white' }}>2</Text>
-
-        </TouchableOpacity>
-
-
-
-        <TouchableOpacity onPress={()=>{this.press3(); Tts.speak(number3check,{language:"ko"});}} style={{backgroundColor:checkchange3,position: 'absolute',right:60,paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10}}>
-
-          <Text style ={{fontSize:20,color:'white' }}>3</Text>
-
-        </TouchableOpacity>
-
+            
+        <TouchableOpacity style={{ backgroundColor:'orange',position: 'absolute',top:230,margin:60,padding:30,borderRadius: 10,right:-120}}   
         
+                       onPress={() => {this._startRecognition(); }} >
 
-      <Image style={{ position:'absolute' , top:350, left:50 }} source={require('../QUIZ/Images/gi.png')} />
+                       <Text style ={{fontSize:70,color:'white' }}>3</Text>
+       </TouchableOpacity>
 
-      <Image style={{ position:'absolute' , top:350, alignItems :'center' }}  source={require('../QUIZ/Images/ni.png')}/>
+               
+      <TouchableOpacity style={{backgroundColor:'black', position:'absolute',left:-50,paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10 ,  bottom :80   }}
+                       
+                       onPress={() => {this._startRecognition(); }}  >
 
-      <Image style={{ position:'absolute' , top:350,right:50 }}  source={require('../QUIZ/Images/di.png')}/>
+                        <Text style ={{fontSize:20,color:'white' }}>시작페이지</Text>
+       </TouchableOpacity>
+                 
+      <TouchableOpacity style={{backgroundColor:'black', position:'absolute',right:-20,paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10 ,  bottom :80   }}   
+                       
+                       onPress={() => {this._startRecognition(); }}  >
 
-      
+                       <Text style ={{fontSize:20,color:'white' }}>정답듣기</Text>
+       </TouchableOpacity>
+        
+       </TouchableOpacity>
 
+       </View>
 
-
-      <TouchableOpacity  onPress={() => { Tts.speak("처음으로 돌아가기" , {language:"ko"}); this.props.navigation.navigate('quizstart');  }}  style={{backgroundColor:'orange', position:'absolute',left:200,paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10 ,  bottom :80   }}>
-
-      <Text style ={{fontSize:20,color:'white' }}>돌아가기</Text>
-
-        </TouchableOpacity>
-
-      <TouchableOpacity  onPress={() => {Alert.alert('1번');  Tts.speak("정답은 1번입니다" , {language:"ko"});}}  style={{backgroundColor:'orange', position:'absolute',paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10 ,  bottom :80 ,right:200  }}>
-
-      <Text style ={{fontSize:20,color:'white' }}>정답보기</Text>
-
-        </TouchableOpacity>
-
-
-
-      </View>
-
-    );    
-
-  }
-
-}
+);}    }
+       AppRegistry.registerComponent('a_quiz', () => a_quiz);
