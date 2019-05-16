@@ -173,7 +173,7 @@ export default class quizstart extends Component {
 
                 <TouchableOpacity style={{ flex: 1 }}  onPress={() => {this._startRecognition(); }}>
 
-            <TouchableOpacity onPress={() => {this.props.navigation.navigate('a_quiz'); }}style={{backgroundColor:'orange',borderRadius: 5 ,margin:50,padding:15}}
+            <TouchableOpacity) onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 ,margin:50,padding:15}}
 
 
 
@@ -189,7 +189,7 @@ export default class quizstart extends Component {
 
 
 
-             <TouchableOpacity style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}
+             <TouchableOpacity  onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}
 
 
 
@@ -205,7 +205,7 @@ export default class quizstart extends Component {
 
 
 
-            <TouchableOpacity style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}
+            <TouchableOpacity  onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}
 
 
 
