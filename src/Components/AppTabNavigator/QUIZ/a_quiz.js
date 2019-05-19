@@ -4,7 +4,7 @@ import {AppRegistry,Image, View, Text ,Alert,Button} from 'react-native';
 
 import {TouchableOpacity,StyleSheet,TouchableHighlight} from 'react-native';
 
-import { createStackNavigator, createAppContainer } from 'react-navigation'; 
+import { createStackNavigator, createAppContainer,NavigationActions } from 'react-navigation'; 
 
 import Tts from 'react-native-tts';
 
@@ -14,102 +14,93 @@ import Voice from 'react-native-voice';
 
 export default class a_quiz extends Component {
 
+   
 
     constructor(props) {
-
+        
         super(props);
-
-        this.state = { recognized: '', started: '', results: [], partialResults: [], };
-
+        this.mounted = false;
+        this.state = {
+            started: '',
+            results: [],
+           
+        };
 
 
         Tts.speak("자음퀴즈입니다 초성ㄱ은 몇번인가요?",{language:"ko"});
 
         Voice.onSpeechStart = this.onSpeechStart.bind(this);
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
 
-        Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
-
-        Voice.onSpeechResults = this.onSpeechResults.bind(this);
-
-        Voice.onSpeechPartialResults = this.onSpeechPartialResults;
-
+    }
+    componentDidMount() {
+        this.mounted = true;
+       
     }
 
     componentWillUnmount() {
 
         Voice.destroy().then(Voice.removeAllListeners);
-
+        this.mounted = false;
     }
 
     onSpeechStart(e) {
+        if (this.mounted) { 
+            this.setState({
 
-        this.setState({
+                started: '√',
 
-            started: '√',
+            });
 
-        });
-
-    };
-
-    onSpeechRecognized(e) {
-
-        this.setState({
-
-            recognized: '√',
-
-        });
-
-    };
-
-    onSpeechResults(e) {
-
-        this.setState({
-
-            results: e.value,
-
-        });
-
+        };
     }
-
-    onSpeechPartialResults = e => {
-
-        this.setState({
-
-            partialResults: e.value,
-
-        });
-
-    };
-
-    async _startRecognition(e) {
-
-        this.setState({
-
-            recognized: '',
-
-            started: '',
-
-            results: [],
-
-            partialResults: [],
-
-        });
-
-        try {
-
-            await Voice.start('ko-KR');  
-
-            
-
-        } catch (e) {
-
-            console.error(e);
+    
+    onSpeechPartialResults(e) {
+        let speech = e.value[0].split(" ").slice(-1)[0];
+        
+            if (speech.includes("문제")) {
+                Tts.speak("자음퀴즈입니다. 초성 'ㄱ'은 무엇인가요?",{language:"ko"});
+                this.setState({
+                    results: '',
+                
+                });
+            }
+            else if (speech.includes("다음")) {
+                this.props.navigation.navigate('a_quiz_two');
+                this.setState({
+                    results: '',
+                
+                });
+            }
+            else if (speech.includes("정답")) {
+                Tts.speak("정답은 1번입니다.",{language:"ko"});
+                this.setState({
+                    results: '',
+                
+                });
+            }
+            else if (speech.includes("시작")) {
+                
+                this.props.navigation.navigate('quizstart');
+                this.setState({
+                    results: '',
+                
+                });
+            }
 
         }
-
-    }
-
-    
+    async _startRecognition(e) {
+        if (this.mounted) {
+            this.setState({
+                started: '',
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }}
 
     render() {
 
@@ -121,15 +112,6 @@ export default class a_quiz extends Component {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor :'bisque'  }}>
 
 
-           {this.state.partialResults.map((result, index) => {
-
-               return (
-
-               <Text key={`partial-result-${index}`} >{result == "문제"?  Tts.speak("자음퀴즈입니다. 초성 'ㄱ'은 무엇인가요?",{language:"ko"}):''}{result == "다음"? this.props.navigation.navigate('a_quiz_two') :''}
-
-       {result == "정답"? Tts.speak("정답은 1번입니다.",{language:"ko"}):''}{result == "시작"? this.props.navigation.navigate('quizstart'):''}
-
-                </Text>);})}
 
        <TouchableOpacity style={{ flex: 1 }}  onPress={() => {this._startRecognition(); }}>
 
@@ -200,4 +182,4 @@ export default class a_quiz extends Component {
        </View>
 
 );}    }
-       AppRegistry.registerComponent('a_quiz', () => a_quiz);
+      

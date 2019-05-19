@@ -1,154 +1,99 @@
 ﻿import React , {Component}  from 'react';
 
-
-
 import {AppRegistry,Image, View, Text ,Alert,Button} from 'react-native';
-
-
 
 import {TouchableOpacity,StyleSheet,TouchableHighlight} from 'react-native';
 
-
-
-import { createStackNavigator, createAppContainer } from 'react-navigation'; 
-
-
+import { createStackNavigator, createAppContainer ,NavigationActions} from 'react-navigation'; 
 
 import Tts from 'react-native-tts';
-
-
 
 import Voice from 'react-native-voice';
 
 
-
-
-
-
-
-
-
-
-
 export default class quizstart extends Component {
 
-
-
+   
+   
     constructor(props) {
 
         super(props);
-
+        
         this.state = {
-
-            recognized: '',
-
             started: '',
-
             results: [],
-
-            partialResults: [],
-
+   
         };
-
-
-
+        this.mounted = false;
         Tts.speak("자음퀴즈 모음퀴즈 약어 약자 퀴즈 중에 선택해주세요",{language:"ko"});
 
         Voice.onSpeechStart = this.onSpeechStart.bind(this);
-
-        Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
-
-        Voice.onSpeechResults = this.onSpeechResults.bind(this);
-
-        Voice.onSpeechPartialResults = this.onSpeechPartialResults;
-
-        
-
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
     }
+
+    componentDidMount() {
+        
+        this.mounted= true;
+        
+      
+    }
+
 
     componentWillUnmount() {
 
         Voice.destroy().then(Voice.removeAllListeners);
-
+        this.mounted = false;
+       
+      
+        
     }
 
     onSpeechStart(e) {
-
-        this.setState({
-
-            started: '√',
-
-        });
-
-    };
-
-    onSpeechRecognized(e) {
-
-        this.setState({
-
-            recognized: '√',
-
-        });
-
-    };
-
-    onSpeechResults(e) {
-
-        this.setState({
-
-            results: e.value,
-
-            
-
-        });
-
+        if (this.mounted) { 
+            this.setState({
+                started: '√',
+            });
+        };
     }
 
-    onSpeechPartialResults = e => {
+    onSpeechPartialResults(e) {
+        let speech = e.value[0].split(" ").slice(-1)[0];
 
        
-
-        this.setState({
-
-            partialResults: e.value,
-
-        });
-
-    };
-
-
-
-
-
-    async _startRecognition(e) {
-
-        this.setState({
-
-            recognized: '',
-
-            started: '',
-
-            results: [],
-
-            partialResults: [],
-
-        });
-
-        try {
-
-            await Voice.start('ko-KR');  
-
-            
-
-        } catch (e) {
-
-            console.error(e);
+            if (speech.includes("자음")) {               
+                this.props.navigation.navigate('a_quiz');
+                this.setState({
+                    results: '',
+               
+                });
+            } else if (speech.includes("모음")) {
+                this.props.navigation.navigate('b_quiz');
+                this.setState({
+                    results: '',
+                
+                });
+            }
+            else if (speech.includes("약어약자")) {
+                this.props.navigation.navigate('c_quiz');
+                this.setState({
+                    results: '',
+                
+                });
+            }
 
         }
-
-    }
-
-    
+    async _startRecognition(e) {
+        if (this.mounted) {
+            this.setState({
+                started: '',
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }}
 
     render() {
 
@@ -161,23 +106,9 @@ export default class quizstart extends Component {
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor :'bisque'  }}>
 
 
-           {this.state.partialResults.map((result, index) => {
-
-               return (
-
-               <Text key={`partial-result-${index}`} >  {result == "자음"? this.props.navigation.navigate('a_quiz') :''}{result == "모음"? this.props.navigation.navigate('b_quiz') :''}
-
-               {result == "약어약자"? this.props.navigation.navigate('c_quiz') :''}
-
-                </Text>);})}
-
                 <TouchableOpacity style={{ flex: 1 }}  onPress={() => {this._startRecognition(); }}>
 
-            <TouchableOpacity) onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 ,margin:50,padding:15}}
-
-
-
-                          >
+            <TouchableOpacity onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 ,margin:50,padding:15}}>
 
 
 
@@ -189,11 +120,7 @@ export default class quizstart extends Component {
 
 
 
-             <TouchableOpacity  onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}
-
-
-
-                          >
+             <TouchableOpacity onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}>
 
 
 
@@ -205,11 +132,7 @@ export default class quizstart extends Component {
 
 
 
-            <TouchableOpacity  onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}
-
-
-
-                          >
+            <TouchableOpacity onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}>
 
 
 
@@ -218,31 +141,14 @@ export default class quizstart extends Component {
 
 
             </TouchableOpacity>
-
-        
-
-    
-
-
-
+ 
+       
             </TouchableOpacity>
 
-
-
-
-
-
-
           </View>
-
-
-
-
-
-
 
        );
 
 
            }    }
-           AppRegistry.registerComponent('quizstart', () => quizstart);
+           
