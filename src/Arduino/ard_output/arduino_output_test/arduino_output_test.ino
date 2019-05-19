@@ -26,15 +26,16 @@ void setup() {
     LeftSol_Status[i] = LOW;
     RightSol_Status[i] = LOW;
   }
-}
-
-void loop() {
-  String DotData = "";
   for(int i = 0; i < 6; i++) //상태 업데이트
   {
     digitalWrite(LeftSolenoid[i], LeftSol_Status[i]);
     digitalWrite(RightSolenoid[i], RightSol_Status[i]);
   }
+
+}
+
+void loop() {
+  String DotData = "";
 
   if (BTSerial.available())
   {   
@@ -44,10 +45,20 @@ void loop() {
       Bluetooth = 1;
     }
     DotData = ReceiveDot();
-    StoreDot(DotData,DataLength);
-    PrintDot(DataLength);
-  }
 
+    Serial.print("Data Length : ");
+    Serial.println(DataLength);
+
+    StoreDot(DotData,DataLength);
+
+    for(int i = 0; i < 6; i++)
+    {
+      Serial.print(DataArray[i]);
+    }
+
+    PrintDot(DataLength);
+    ResetAll();
+  }
 }
 
 String ReceiveDot()   
@@ -76,25 +87,36 @@ void StoreDot(String Ddata, int Dlength)
 void PrintDot(int Dlength)
 {
   int DotSet = Dlength;
-  for(int i = 0; i < DotSet; i++)
+  for(int i = 0; i < Dlength; i++)
   {
-    for(int i = 0; i < 6; i++)
+    for(int j = 0; j < 6; j++)
     {
       if(DotSet/2==0 && DotSet!=0)
       {
-        digitalWrite()
+        if(DataArray[i*6+j]==1)
+          LeftSol_Status[j] = HIGH;
+        else
+          LeftSol_Status[j] = LOW;
+
+        digitalWrite(LeftSolenoid[j], LeftSol_Status[j]);
       }
       else if(DotSet/2==1 && DotSet!=0)
       {
-
+        if(DataArray[i*6+j]==1)
+          RightSol_Status[j] = HIGH;
+        else
+          RightSol_Status[j] = LOW;
+          
+        digitalWrite(RightSolenoid[j], RightSol_Status[j]);
       }
     }
     DotSet -= 1;
     delay(1500);
   }
+  Serial.println("Printing complete");
 }
 
-void Reset()
+void ResetAll()
 {
   for(int i = 0; i < 55; i++)
   {
@@ -114,4 +136,5 @@ void Reset()
     digitalWrite(LeftSolenoid[i], LOW);
     digitalWrite(RightSolenoid[i], LOW);
   }
+  Serial.println("Reset complete");
 }
