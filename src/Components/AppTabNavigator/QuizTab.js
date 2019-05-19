@@ -33,6 +33,7 @@ const importss = createStackNavigator(
     {
 
         initialRouteName:'quizstart',
+        headerMode:'none',
 
     }
 
