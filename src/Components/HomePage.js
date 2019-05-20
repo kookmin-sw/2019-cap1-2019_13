@@ -560,7 +560,7 @@ export default class Home extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                onPress={()=>{this.props.navigation.navigate('Study', {deviceinfo: devices[0]}); Tts.stop(); Tts.speak("퀴즈모드");}} style={styles.button}>
+                onPress={()=>{this.props.navigation.navigate('Quiz', {deviceinfo: devices[0]}); Tts.stop(); Tts.speak("퀴즈모드");}} style={styles.button}>
                 <Text style={styles.textInButton}>퀴즈모드</Text>
                 </TouchableOpacity>
 

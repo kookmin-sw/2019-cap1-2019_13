@@ -15,7 +15,7 @@ class InitialJaumTab extends React.Component{
         } catch (e) {
           Toast.showShortBottom(e.message);
         }
-      };
+    };
     
     render() {
         const {goBack} = this.props.navigation;

@@ -1,16 +1,16 @@
-package com.dotdanbaeALPHA;
+package com.dotdanbaea;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.nuttawutmalee.RCTBluetoothSerial.RCTBluetoothSerialPackage;
-import net.no_mad.tts.TextToSpeechPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import net.no_mad.tts.TextToSpeechPackage;
+import com.wenkesj.voice.VoicePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.facebook.react.BuildConfig;
 import com.remobile.toast.RCTToastPackage;  // <--- import
 
 import java.util.Arrays;
@@ -28,10 +28,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RCTToastPackage(),
             new RCTBluetoothSerialPackage(),
-            new TextToSpeechPackage(),
             new RNGestureHandlerPackage(),
-			      new RCTToastPackage()
+            new TextToSpeechPackage(),
+            new VoicePackage()
       );
     }
 

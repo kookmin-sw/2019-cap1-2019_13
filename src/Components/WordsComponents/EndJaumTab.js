@@ -20,7 +20,7 @@ class EndlJaumTab extends React.Component{
     render() {
         const {goBack} = this.props.navigation;
         const device_dot_in_endjaum = this.props.navigation.getParam('deviceinfo2', 'cantread');
-        console.log("device info in endjaum: ", device_dot_in_end.id);
+        console.log("device info in endjaum: ", device_dot_in_endjaum.id);
         
         return (
             <View style={ styles.container }>

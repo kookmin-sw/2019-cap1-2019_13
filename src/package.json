@@ -1,5 +1,5 @@
 {
-  "name": "dotdanbaeALPHA",
+  "name": "dotdanbaea",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,15 +8,14 @@
   },
   "dependencies": {
     "@remobile/react-native-toast": "^1.0.7",
-    "generator-rn-toolbox": "^3.11.1",
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.8",
     "react-native-bluetooth-serial-next": "^1.2.3",
     "react-native-gesture-handler": "^1.2.1",
     "react-native-tts": "^3.0.0",
-    "react-navigation": "^3.11.0",
-    "yo": "^2.0.6"
+    "react-native-voice": "^0.2.6",
+    "react-navigation": "^3.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
