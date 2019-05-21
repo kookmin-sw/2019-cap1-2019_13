@@ -49,14 +49,14 @@ export default class QuizPage extends Component {
             
             });
         } else if (speech.includes("모음")) {
-            this.props.navigation.navigate('JaumQuiz2', {deviceinfo3: device_dot_in_quizpage});
+            this.props.navigation.navigate('MoumQuiz1', {deviceinfo3: device_dot_in_quizpage});
             this.setState({
                 results: '',
             
             });
         }
         else if (speech.includes("약어약자")) {
-            this.props.navigation.navigate('JaumQuiz3', {deviceinfo3: device_dot_in_quizpage});
+            this.props.navigation.navigate('AbQuiz1', {deviceinfo3: device_dot_in_quizpage});
             this.setState({
                 results: '',
             
