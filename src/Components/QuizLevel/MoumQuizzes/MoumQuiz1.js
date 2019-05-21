@@ -19,7 +19,7 @@ export default class MoumQuiz1 extends Component {
            
         };
 
-        Tts.speak("¸ğÀ½ÄûÁîÀÔ´Ï´Ù ¸ğÀ½ '¤Ã'´Â ¸î¹øÀÎ°¡¿ä",{language:"ko"});
+        Tts.speak("ëª¨ìŒí€´ì¦ˆì…ë‹ˆë‹¤ ëª¨ìŒ 'ã…“'ëŠ” ëª‡ë²ˆì¸ê°€ìš”",{language:"ko"});
 
         Voice.onSpeechStart = this.onSpeechStart.bind(this);
         Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
@@ -46,7 +46,7 @@ export default class MoumQuiz1 extends Component {
     onSpeechStart(e) {
         if (this.mounted) { 
             this.setState({
-                started: '¡î',
+                started: 'âˆš',
             });
 
         };
@@ -57,28 +57,28 @@ export default class MoumQuiz1 extends Component {
         const device_dot_in_moumquiz = this.props.navigation.getParam('deviceinfo3', 'cantread');
         console.log("device info in moumquiz: ", device_dot_in_moumquiz.id);
         
-        if (speech.includes("¹®Á¦")) {
-            Tts.speak("¸ğÀ½ÄûÁîÀÔ´Ï´Ù ¸ğÀ½ '¤Ã'´Â ¸î¹øÀÎ°¡¿ä",{language:"ko"});
+        if (speech.includes("ë¬¸ì œ")) {
+            Tts.speak("ëª¨ìŒí€´ì¦ˆì…ë‹ˆë‹¤ ëª¨ìŒ 'ã…“'ëŠ” ëª‡ë²ˆì¸ê°€ìš”",{language:"ko"});
             this.setState({
                 results: '',
             
             });
         }
-        else if (speech.includes("´ÙÀ½")) {
+        else if (speech.includes("ë‹¤ìŒ")) {
             this.props.navigation.navigate('MoumQuiz2');
             this.setState({
                 results: '',
             
             });
         }
-        else if (speech.includes("Á¤´ä")) {
-            Tts.speak("Á¤´äÀº 1¹øÀÔ´Ï´Ù.",{language:"ko"});
+        else if (speech.includes("ì •ë‹µ")) {
+            Tts.speak("ì •ë‹µì€ 1ë²ˆì…ë‹ˆë‹¤.",{language:"ko"});
             this.setState({
                 results: '',
             
             });
         }
-        else if (speech.includes("½ÃÀÛ")) {
+        else if (speech.includes("ì‹œì‘")) {
             
             this.props.navigation.navigate('Quiz');
             this.setState({
@@ -86,14 +86,14 @@ export default class MoumQuiz1 extends Component {
             
             });
         }
-        else if (speech.includes("1¹ø")) {
-            this.write(device_dot_in_jaumquiz.id, "1011100F");
+        else if (speech.includes("1ë²ˆ")) {
+            this.write(device_dot_in_moumquiz.id, "1011100F");
         }
-        else if (speech.includes("2¹ø")) {
-            this.write(device_dot_in_jaumquiz.id, "1111100F");
+        else if (speech.includes("2ë²ˆ")) {
+            this.write(device_dot_in_moumquiz.id, "1111100F");
         }
-        else if (speech.includes("3¹ø")) {
-            this.write(device_dot_in_jaumquiz.id, "1010101F");
+        else if (speech.includes("3ë²ˆ")) {
+            this.write(device_dot_in_moumquiz.id, "1010101F");
         }
 
     }
@@ -117,11 +117,11 @@ export default class MoumQuiz1 extends Component {
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor :'bisque'  }}>
                 <TouchableOpacity style={{ flex: 1 }}  onPress={() => {this._startRecognition(); }}>
                     <TouchableOpacity style={{backgroundColor:'orange',borderRadius: 5 ,top:70,position: 'absolute',left:-80}} onPress={() => {this._startRecognition(); }} >
-                        <Text style ={{fontSize:30,color:'white'}}>¹®Á¦µè±â </Text>
+                        <Text style ={{fontSize:30,color:'white'}}>ë¬¸ì œë“£ê¸° </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{backgroundColor:'orange',borderRadius: 5 ,top:70,position: 'absolute',right:-80}} onPress={() => {this._startRecognition(); }} >
-                        <Text style ={{fontSize:30,color:'white'}}>´ÙÀ½¹®Á¦ </Text>
+                        <Text style ={{fontSize:30,color:'white'}}>ë‹¤ìŒë¬¸ì œ </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{backgroundColor:'black',borderRadius: 5 , margin:50,padding:15,bottom:10}} onPress={() => {this._startRecognition(); }} >
@@ -132,7 +132,7 @@ export default class MoumQuiz1 extends Component {
                         <Text style ={{fontSize:70,color:'white' }}>1</Text>
                     </TouchableOpacity>
 
-                    <Text style = {{fontSize:40}}>¸ğÀ½ '¤Ã'´Â? </Text> 
+                    <Text style = {{fontSize:40}}>ëª¨ìŒ 'ã…“'ëŠ”? </Text> 
 
                     <TouchableOpacity style={{backgroundColor:'orange', margin:60,padding:30,bottom:5, borderRadius: 10}} onPress={() => {this._startRecognition();}} >
                         <Text style ={{fontSize:70,color:'white'}}>2</Text>
@@ -143,11 +143,11 @@ export default class MoumQuiz1 extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{backgroundColor:'black', position:'absolute',left:-50,paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10 ,  bottom :80   }} onPress={() => {this._startRecognition(); }}  >
-                        <Text style ={{fontSize:20,color:'white' }}>½ÃÀÛÆäÀÌÁö</Text>
+                        <Text style ={{fontSize:20,color:'white' }}>ì‹œì‘í˜ì´ì§€</Text>
                     </TouchableOpacity>
                                 
                     <TouchableOpacity style={{backgroundColor:'black', position:'absolute',right:-20,paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10 ,  bottom :80   }} onPress={() => {this._startRecognition(); }}  >
-                        <Text style ={{fontSize:20,color:'white' }}>Á¤´äµè±â</Text>
+                        <Text style ={{fontSize:20,color:'white' }}>ì •ë‹µë“£ê¸°</Text>
                     </TouchableOpacity>
                 </TouchableOpacity>
             </View>
