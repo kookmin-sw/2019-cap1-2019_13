@@ -4,6 +4,7 @@ import {TouchableOpacity,StyleSheet,TouchableHighlight} from 'react-native';
 import { createStackNavigator, createAppContainer ,NavigationActions} from 'react-navigation'; 
 import Tts from 'react-native-tts';
 import Voice from 'react-native-voice';
+import { Icon } from 'native-base';
 
 export default class QuizPage extends Component {
     constructor(props) {
@@ -46,20 +47,17 @@ export default class QuizPage extends Component {
             this.props.navigation.navigate('JaumQuiz1', {deviceinfo3: device_dot_in_quizpage});
             this.setState({
                 results: '',
-            
             });
         } else if (speech.includes("모음")) {
             this.props.navigation.navigate('MoumQuiz1', {deviceinfo3: device_dot_in_quizpage});
             this.setState({
                 results: '',
-            
             });
         }
         else if (speech.includes("약어약자")) {
             this.props.navigation.navigate('AbQuiz1', {deviceinfo3: device_dot_in_quizpage});
             this.setState({
                 results: '',
-            
             });
         }
     }
@@ -79,25 +77,55 @@ export default class QuizPage extends Component {
     }
 
     render() {
-        
-        
+        const {goBack} = this.props.navigation;
+
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor :'bisque'  }}>
-                <TouchableOpacity style={{ flex: 1 }}  onPress={() => {this._startRecognition(); }}>
-                    <TouchableOpacity onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 ,margin:50,padding:15}}>
-                        <Text style ={{fontSize:30,color:'white'}}>자음 QUIZ </Text>
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor :'#f5fcff' }}>
+                <View style={styles.goback}> 
+                    <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Tts.speak("뒤로가기", { language: "ko", rate : 0.75 });}} />
+           </View>
+                <TouchableOpacity style={{ flex: 0.9, alignItems: 'center', marginTop: 80}} >
+                    <TouchableOpacity onPress={() => {this.props.navigation.navigate('JaumQuiz1');}} style={{backgroundColor:'#22509d', alignItems: 'center', justifyContent: 'center', borderRadius: 30 , margin:50, width: 220, height: 70, marginTop:-20}}>
+                        <Text style ={{fontSize:30, color:'white'}}>자음 QUIZ</Text>
                     </TouchableOpacity>
                 
-                    <TouchableOpacity onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}>
-                        <Text style ={{fontSize:30,color:'white'}}>모음 QUIZ </Text>
+                    <TouchableOpacity onPress={() => {this.props.navigation.navigate('MoumQuiz1');}} style={{backgroundColor:'#22509d', alignItems: 'center', justifyContent: 'center', borderRadius: 30 , margin:50, width: 220, height: 70, marginTop:-20}}>
+                        <Text style ={{fontSize:30, color:'white'}}>모음 QUIZ</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => {this._startRecognition(); }}style={{backgroundColor:'orange',borderRadius: 5 , margin:50,padding:15}}>
-                        <Text style ={{fontSize:30,color:'white'}}>약어,약자 QUIZ </Text>
+                    <TouchableOpacity onPress={() => {this.props.navigation.navigate('AbQuiz1');}} style={{backgroundColor:'#22509d', alignItems: 'center', justifyContent: 'center', borderRadius: 30 , margin:50, width: 220, height: 70,  marginTop:-20}}>
+                        <Text style ={{fontSize:30, color:'white'}}>약어,약자 QUIZ</Text>
                     </TouchableOpacity>
+                    
+                        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                        <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                            <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                        </TouchableOpacity>                
+                    </View>
                 </TouchableOpacity>
             </View>
        );
-    }    
+}    
 }
-           
+
+const styles = StyleSheet.create({
+    goback: {
+        flex: 0.1,
+        width: 40,
+        height: 40,
+        marginLeft: 20,
+        marginTop: 10,
+    },
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 250,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    }
+
+});
+
