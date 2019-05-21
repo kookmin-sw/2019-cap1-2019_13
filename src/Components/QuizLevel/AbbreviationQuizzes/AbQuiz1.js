@@ -1,4 +1,4 @@
-import React , {Component}  from 'react';
+﻿import React , {Component}  from 'react';
 import {AppRegistry,Image, View, Text ,Alert,Button} from 'react-native';
 import {TouchableOpacity,StyleSheet,TouchableHighlight} from 'react-native';
 import { createStackNavigator, createAppContainer,NavigationActions } from 'react-navigation'; 
@@ -8,6 +8,7 @@ import Toast from "@remobile/react-native-toast";
 import BluetoothSerial, {
     withSubscription
 } from "react-native-bluetooth-serial-next";
+import { Icon } from 'native-base';
 
 export default class AbQuiz1 extends Component {
     constructor(props) {
@@ -58,42 +59,38 @@ export default class AbQuiz1 extends Component {
         console.log("device info in Abquiz: ", device_dot_in_abquiz.id);
         
         if (speech.includes("문제")) {
-            Tts.speak("약어약자 퀴즈입니다 약자 받침 'ㅆ'은 몇번인가요?",{language:"ko"});
+            Tts.speak("약어약자 퀴즈입니다 약자 받침 'ㅆ'은 몇번인가요", {language:"ko"});
             this.setState({
                 results: '',
-            
+
             });
         }
         else if (speech.includes("다음")) {
             this.props.navigation.navigate('AbQuiz2');
             this.setState({
                 results: '',
-            
             });
         }
         else if (speech.includes("정답")) {
             Tts.speak("정답은 3번입니다.",{language:"ko"});
             this.setState({
                 results: '',
-            
             });
         }
         else if (speech.includes("시작")) {
-            
             this.props.navigation.navigate('Quiz');
             this.setState({
                 results: '',
-            
             });
         }
         else if (speech.includes("1번")) {
-            this.write(device_dot_in_abquiz.id, "1000100F");
+            this.write(device_dot_in_jaumquiz.id, "1000100F");
         }
         else if (speech.includes("2번")) {
-            this.write(device_dot_in_abquiz.id, "1100100F");
+            this.write(device_dot_in_jaumquiz.id, "1100100F");
         }
         else if (speech.includes("3번")) {
-            this.write(device_dot_in_abquiz.id, "1001100F");
+            this.write(device_dot_in_jaumquiz.id, "1001100F");
         }
 
     }
@@ -113,45 +110,113 @@ export default class AbQuiz1 extends Component {
     }
 
     render() {
+        const {goBack} = this.props.navigation;
+
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor :'bisque'  }}>
-                <TouchableOpacity style={{ flex: 1 }}  onPress={() => {this._startRecognition(); }}>
-                    <TouchableOpacity style={{backgroundColor:'orange',borderRadius: 5 ,top:70,position: 'absolute',left:-80}} onPress={() => {this._startRecognition(); }} >
-                        <Text style ={{fontSize:30,color:'white'}}>문제듣기 </Text>
-                    </TouchableOpacity>
+            <View style={{ flex: 1, backgroundColor : '#f5fcff' }}>
+                <View style={styles.goback}> 
+                    <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Tts.speak("뒤로가기", { language: "ko", rate : 0.75 });}} />
+</View>
 
-                    <TouchableOpacity style={{backgroundColor:'orange',borderRadius: 5 ,top:70,position: 'absolute',right:-80}} onPress={() => {this._startRecognition(); }} >
-                        <Text style ={{fontSize:30,color:'white'}}>다음문제 </Text>
-                    </TouchableOpacity>
+    <TouchableOpacity style={{ flex: 0.9 }}>
+                    
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <TouchableOpacity style={styles.buttonst} onPress={() => {Tts.speak("약어약자 퀴즈입니다 약자 받침 'ㅆ'은 몇번인가요?", {language:"ko"});}} >
+                            <Text style ={{fontSize:30, color:'white'}}>문제듣기 </Text>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity style={{backgroundColor:'black',borderRadius: 5 , margin:50,padding:15,bottom:10}} onPress={() => {this._startRecognition(); }} >
-                        <Text style ={{fontSize:30,color:'white'}}>QUIZ! </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity  style={{ backgroundColor:'orange',position: 'absolute',top:230,margin:60,padding:30,borderRadius: 10,left:-120}} onPress={() => {this._startRecognition();}}>
-                        <Text style ={{fontSize:70,color:'white' }}>1</Text>
-                    </TouchableOpacity>
-
-                    <Text style = {{fontSize:40}}>약자 받침 "ㅆ"은? </Text> 
-
-                    <TouchableOpacity style={{backgroundColor:'orange', margin:60,padding:30,bottom:5, borderRadius: 10}} onPress={() => {this._startRecognition();}} >
-                        <Text style ={{fontSize:70,color:'white'}}>2</Text>
-                    </TouchableOpacity>
                         
-                    <TouchableOpacity style={{ backgroundColor:'orange',position: 'absolute',top:230,margin:60,padding:30,borderRadius: 10,right:-120}} onPress={() => {this._startRecognition();}} >
-                        <Text style ={{fontSize:70,color:'white'}}>3</Text>
-                    </TouchableOpacity>
+                            <Text style={{color: 'black', fontSize: 75}}>Quiz</Text>
+                        
+                        <TouchableOpacity style={styles.buttonst} onPress={() => {this.props.navigation.navigate('AbQuiz2');}} >
+                            <Text style ={{fontSize:30, color:'white'}}>다음문제 </Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <TouchableOpacity style={styles.buttonst2} onPress={() =>  {this.props.navigation.navigate('Quiz'); }}  >
+                            <Text style ={{fontSize:20, color:'white' }}>시작페이지</Text>
+                        </TouchableOpacity>
+                                    
+                        <TouchableOpacity style={styles.buttonst2} onPress={() => {Tts.speak("정답은 3번입니다.",{language:"ko"}); }}  >
+                            <Text style ={{fontSize:20, color:'white' }}>정답듣기</Text>
+                        </TouchableOpacity>
+                    </View>
 
-                    <TouchableOpacity style={{backgroundColor:'black', position:'absolute',left:-50,paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10 ,  bottom :80   }} onPress={() => {this._startRecognition(); }}  >
-                        <Text style ={{fontSize:20,color:'white' }}>시작페이지</Text>
-                    </TouchableOpacity>
-                                
-                    <TouchableOpacity style={{backgroundColor:'black', position:'absolute',right:-20,paddingTop:10,paddingBottom:10, paddingLeft:20, paddingRight:20, borderRadius: 10 ,  bottom :80   }} onPress={() => {this._startRecognition(); }}  >
-                        <Text style ={{fontSize:20,color:'white' }}>정답듣기</Text>
-                    </TouchableOpacity>
+                    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                        <Text style = {{fontSize:50, color: 'black'}}>약자 받침 "ㅆ"은?</Text> 
+                    </View>
+
+                    <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 50}}>
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("일번",{language:"ko"});}}>
+                            <Text style ={{fontSize:70,color:'white' }}>1</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("이번",{language:"ko"});}}>
+                            <Text style ={{fontSize:70,color:'white'}}>2</Text>
+                        </TouchableOpacity>
+                            
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("삼번",{language:"ko"});}}>
+                            <Text style ={{fontSize:70,color:'white'}}>3</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                        <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                            <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                        </TouchableOpacity>                
+                    </View>
                 </TouchableOpacity>
             </View>
         );
 }    
 }
-      
+
+const styles = StyleSheet.create({
+    goback: {
+        flex: 0.1,
+        width: 40,
+        height: 40,
+        marginLeft: 20,
+        marginTop: 20,
+    },
+    button: {
+        borderRadius: 60,
+        margin: 30,
+        height: 110,
+        width: 110, 
+        backgroundColor: '#0080ff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    }, 
+    buttonst: {
+        borderRadius: 30,
+        margin: 30,
+        height: 70,
+        width: 140, 
+        backgroundColor: '#22509d',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    }, 
+    buttonst2: {
+        borderRadius: 30,
+        margin: 30,
+        height: 60,
+        width: 110, 
+        backgroundColor: '#22509d',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    }, 
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 250,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    }
+});
