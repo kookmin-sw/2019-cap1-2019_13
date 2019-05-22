@@ -1,13 +1,200 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Icon } from 'native-base';
 import Tts from 'react-native-tts';
 import Toast from "@remobile/react-native-toast";
 import BluetoothSerial, {
     withSubscription
-  } from "react-native-bluetooth-serial-next";
+} from "react-native-bluetooth-serial-next";
+import Voice from 'react-native-voice';
 
 class MoumTab extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            started: '',
+            results: [],
+   
+        };
+        this.mounted = false;
+        Tts.speak("어떤 글자를 알고싶나요",{language:"ko"});
+
+        Voice.onSpeechStart = this.onSpeechStart.bind(this);
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
+    }
+
+    componentDidMount() {
+        this.mounted= true;
+    }
+
+    componentWillUnmount() {
+        Voice.destroy().then(Voice.removeAllListeners);
+        this.mounted = false;
+    }
+
+    onSpeechStart(e) {
+        if (this.mounted) { 
+            this.setState({
+                started: '√',
+            });
+        };
+    }
+
+    onSpeechPartialResults(e) {
+        console.log("mountab에서 onspeechpartial");
+        let speech = e.value[0].split(" ").slice(-1)[0];
+        console.log("speech: ", speech);
+        const device_dot_in_moum = this.props.navigation.getParam('deviceinfo2', 'cantread');
+        const {goBack} = this.props.navigation;
+
+        if (speech.includes("뒤로")) {
+            goBack();
+        }
+        else if (speech.includes("아")) {
+            console.log("아 들었!");               
+            this.write(device_dot_in_moum.id, "1110001F");
+            this.setState({
+                results: '',
+            });
+        } 
+        else if (speech.includes("야")) {
+            console.log("야 들었!");
+            this.write(device_dot_in_moum.id, "1001110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("어")) {
+            this.write(device_dot_in_moum.id, "1011110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("여")) {
+            this.write(device_dot_in_moum.id, "1100011F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("오")) {
+            this.write(device_dot_in_moum.id, "1101001F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("요")) {
+            this.write(device_dot_in_moum.id, "1001101F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("우")) {
+            this.write(device_dot_in_moum.id, "1101100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("유")) {
+            this.write(device_dot_in_moum.id, "1100101F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("으")) {
+            this.write(device_dot_in_moum.id, "1010101F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("이")) {
+            this.write(device_dot_in_moum.id, "1101010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("애")) {
+            this.write(device_dot_in_moum.id, "1111010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("얘")) {
+            this.write(device_dot_in_moum.id, "2001110111010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("에")) {
+            this.write(device_dot_in_moum.id, "1101110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("예")) {
+            this.write(device_dot_in_moum.id, "1001100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("와")) {
+            this.write(device_dot_in_moum.id, "1111001F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech == "왜") {
+            console.log("왜 들었!");
+            this.write(device_dot_in_moum.id, "2111001111010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("외")) {
+            this.write(device_dot_in_moum.id, "1101111F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("워")) {
+            this.write(device_dot_in_moum.id, "1111100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("웨")) {
+            this.write(device_dot_in_moum.id, "2111100111010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("위")) {
+            this.write(device_dot_in_moum.id, "2101100111010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("의")) {
+            this.write(device_dot_in_moum.id, "1010111F");
+            this.setState({
+                results: '',
+            });
+        }
+    }
+
+    async _startRecognition(e) {
+        if (this.mounted) {
+            this.setState({
+                started: '',
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
+
     write = async (id, message) => {
         try {
           await BluetoothSerial.device(id).write(message);
@@ -15,7 +202,7 @@ class MoumTab extends React.Component{
         } catch (e) {
           Toast.showShortBottom(e.message);
         }
-      };
+    };
     
     render() {
         const {goBack} = this.props.navigation;
@@ -23,7 +210,7 @@ class MoumTab extends React.Component{
         console.log("device info in moumpage: ", device_dot_in_moum.id);
         
         return (
-            <View style={ styles.container }>
+            <ScrollView style={ styles.container }>
                 <View style={styles.goback}> 
                     <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Tts.speak("뒤로가기", { language: "ko", rate : 0.75 });}} />
                 </View>
@@ -133,8 +320,14 @@ class MoumTab extends React.Component{
                             <Text style={styles.text}>ㅢ</Text>
                         </TouchableOpacity>
                     </View>
-                </View>    
-            </View>
+                </View>
+
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                        <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                    </TouchableOpacity>                
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -151,7 +344,6 @@ const styles = StyleSheet.create({
         margin: 20,
     },
     syllables: {
-        marginTop: 50,
         marginLeft: 20,
         marginRight: 20
     },
@@ -168,6 +360,17 @@ const styles = StyleSheet.create({
         textAlign:'center', 
         fontWeight:'bold', 
         fontSize:30,
+    },
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 200,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 70
     }
 });
 

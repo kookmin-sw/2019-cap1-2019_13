@@ -6,6 +6,7 @@ import Toast from "@remobile/react-native-toast";
 import BluetoothSerial, {
     withSubscription
 } from "react-native-bluetooth-serial-next";
+import Voice from 'react-native-voice';
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -14,6 +15,87 @@ class Color extends Component {
     state = {
         screenWidth: 0,
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            started: '',
+            results: [],
+   
+        };
+        this.mounted = false;
+        Tts.speak("색깔을 말해보세요", {language:"ko"});
+
+        Voice.onSpeechStart = this.onSpeechStart.bind(this);
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
+    }
+
+    componentDidMount() {
+        this.mounted= true;
+    }
+
+    componentWillUnmount() {
+        Voice.destroy().then(Voice.removeAllListeners);
+        this.mounted = false;
+    }
+
+    onSpeechStart(e) {
+        if (this.mounted) { 
+            this.setState({
+                started: '√',
+            });
+        };
+    }
+
+    onSpeechPartialResults(e) {
+        console.log('here color');
+        var speech = e.value[0].split(" ").slice(-1)[0];
+        console.log(speech);
+        const {goBack} = this.props.navigation;
+        const device_dot_in_color = this.props.navigation.getParam('deviceinfo2', 'cantread');
+
+        if (speech.includes("뒤로")) {
+            goBack();
+        }
+        else if (speech.includes("빨강")) {               
+            this.write(device_dot_in_color.id, "7000001000110110001010000000100110001011011F");
+            this.setState({
+                results: '',
+            });
+        } 
+        else if (speech.includes("노랑")) {
+            this.write(device_dot_in_color.id, "5100100101001000010110001011011F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("초록")) {
+            this.write(device_dot_in_color.id, "5000011101001000010101001100000F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("파랑")) {
+            this.write(device_dot_in_color.id, "5100110110001000010110001011011F");
+            this.setState({
+                results: '',
+            });
+        }
+    }
+
+    async _startRecognition(e) {
+        if (this.mounted) {
+            this.setState({
+                started: '',
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
 
     onContentSizeChange = (contentWidth, contentHeight) => {
         this.setState({ screenWidth: contentWidth });
@@ -69,6 +151,12 @@ class Color extends Component {
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
+
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                        <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                    </TouchableOpacity>                
+                </View>
             </View>
         );
     }
@@ -87,14 +175,18 @@ const styles = StyleSheet.create({
     },
     card: {
         borderRadius: 50,
+        borderWidth: 2,
+        borderColor: '#abb0b2',
         backgroundColor: 'white',
         width: 300,
-        height: 500,
-        margin: 55,
+        height: 450,
+        marginTop: 10,
+        marginRight: 40,
+        marginLeft: 40,
+        marginBottom: 30,
         alignItems: 'center',
     },
     img: {
-        marginTop: 30,
         width: 250,
         height: 300,
         margin: 10,
@@ -112,6 +204,17 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 25
     },
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 250,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 0,
+        marginBottom: 70
+    }
 });
 
 export default Color; 

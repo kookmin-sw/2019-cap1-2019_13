@@ -2,21 +2,114 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import Tts from 'react-native-tts';
 import { Icon } from 'native-base';
+import Voice from 'react-native-voice';
 
-class MenuTab extends Component{
+class StudyPage extends Component{
     constructor(props) {
         super(props);
         Tts.setDefaultLanguage('ko');
         Tts.addEventListener('tts-start', event => console.log('start', event));
         Tts.addEventListener('tts-finish', event => console.log('finish', event));
         Tts.addEventListener('tts-cancel', event => console.log('cancel', event));
+        
+        this.mounted = false;
+        this.thisPage = '';
+        Tts.speak("어떤걸 배우고싶으세요",{language:"ko"});
+    }
+
+    componentDidMount() {
+        console.log("componentDidMount");
+        this._startRecognition();
+        this.mounted= true;
+    }
+
+    componentWillUnmount() {
+        Voice.destroy().then(Voice.removeAllListeners);
+        this.mounted = false;
+      }
+
+    onSpeechStartAtStudy(e) {
+        console.log("onSpeechStart in study");
+        if (this.mounted) { 
+            this.setState({
+                started: '√',
+            });
+        };
+    }
+
+    onSpeechPartialResultsAtStudy(e) {
+        console.log("studypage에서 onspeechpartial");
+        let speech = e.value[0].split(" ").slice(-1)[0];
+        const {goBack} = this.props.navigation;
+        const device_dot = this.props.navigation.getParam('deviceinfo', 'cantread');
+        console.log("speech: ", speech);
+
+        if (speech.includes("뒤로")) {
+            goBack();
+        }
+        else if (speech.includes("초성")) {               
+            this.props.navigation.navigate('InitialJaum', {deviceinfo2: device_dot});
+            this.setState({
+                results: '',
+            });
+        } 
+        else if (speech.includes("모음")) {
+            this.props.navigation.navigate('Moum', {deviceinfo2: device_dot});
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("거")) {
+            this.props.navigation.navigate('Abbreviation', {deviceinfo2: device_dot});
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("종자")) {
+            this.props.navigation.navigate('EndJaum', {deviceinfo2: device_dot});
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("부호")) {
+            this.props.navigation.navigate('Punctuation', {deviceinfo2: device_dot});
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("카테고리")) {
+            this.props.navigation.navigate('Category', {deviceinfo2: device_dot});
+            this.setState({
+                results: '',
+            });
+        }
+    }
+
+    async _startRecognition(e) {
+        console.log("스터디모드에서 눌렀어~");
+        console.log("mounted in study: ", this.mounted);
+        this.mounted = true;
+        this.thisPage = "StudyPage";
+        Voice.onSpeechStart = this.onSpeechStartAtStudy.bind(this);
+        Voice.onSpeechPartialResults = this.onSpeechPartialResultsAtStudy.bind(this);
+        if (this.mounted) {
+            this.setState({
+                started: true,
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }
     }
 
     render() {
         const {goBack} = this.props.navigation;
         const device_dot = this.props.navigation.getParam('deviceinfo', 'cantread');
         console.log("deviceinfo in studypage: ", device_dot.id);
-
+        
         return (
             <View style={ styles.container }>
                 <View style={styles.goback}> 
@@ -56,17 +149,17 @@ class MenuTab extends Component{
                         </View>
                         <View>
                             <TouchableOpacity 
-                            onPress={()=>{this.props.navigation.navigate('Punctuation', {deviceinfo2: device_dot}); Tts.stop(); Tts.speak("문장부호 배우기");}} style={styles.button}>
-                                <Text style={styles.textInButton}>문장부호</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <TouchableOpacity 
                             onPress={()=>{this.props.navigation.navigate('Category', {deviceinfo2: device_dot}); Tts.stop(); Tts.speak("카테고리로 배우기");}} style={styles.button}>
                                 <Text style={styles.textInButton}>카테고리</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
+                </View>
+
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                        <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                    </TouchableOpacity>                
                 </View>
             </View>
             
@@ -96,7 +189,7 @@ const styles = StyleSheet.create({
     buttons: {
         flex: 0.9,
         alignItems: 'center',
-        marginTop: 200,
+        marginTop: 80,
     },
     textInButton: {
         color: 'white',
@@ -110,6 +203,17 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 20,
     },
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 250,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 70
+    }
 });
 
-export default MenuTab; 
+export default StudyPage; 

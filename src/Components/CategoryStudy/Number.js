@@ -6,6 +6,7 @@ import Toast from "@remobile/react-native-toast";
 import BluetoothSerial, {
     withSubscription
 } from "react-native-bluetooth-serial-next";
+import Voice from 'react-native-voice';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -13,6 +14,87 @@ class Number extends Component {
     state = {
         screenWidth: 0,
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            started: '',
+            results: [],
+   
+        };
+        this.mounted = false;
+        Tts.speak("숫자를 말해보세요", {language:"ko"});
+
+        Voice.onSpeechStart = this.onSpeechStart.bind(this);
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
+    }
+
+    componentDidMount() {
+        this.mounted= true;
+    }
+
+    componentWillUnmount() {
+        Voice.destroy().then(Voice.removeAllListeners);
+        this.mounted = false;
+    }
+
+    onSpeechStart(e) {
+        if (this.mounted) { 
+            this.setState({
+                started: '√',
+            });
+        };
+    }
+
+    onSpeechPartialResults(e) {
+        console.log('here number');
+        var speech = e.value[0].split(" ").slice(-1)[0];
+        console.log(speech);
+        const {goBack} = this.props.navigation;
+        const device_dot_in_number = this.props.navigation.getParam('deviceinfo2', 'cantread');
+
+        if (speech.includes("뒤로")) {
+            goBack();
+        }
+        else if (speech.includes("일") || speech.includes("1")) {
+            this.write(device_dot_in_number.id, "2001111100000F");
+            this.setState({
+                results: '',
+            });
+        } 
+        else if (speech.includes("이") || speech.includes("2")) {
+            this.write(device_dot_in_number.id, "2001111110000F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("삼") || speech.includes("3")) {
+            this.write(device_dot_in_number.id, "2001111100100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("사") || speech.includes("4")) {
+            this.write(device_dot_in_number.id, "2001111100110F");
+            this.setState({
+                results: '',
+            });
+        }
+    }
+
+    async _startRecognition(e) {
+        if (this.mounted) {
+            this.setState({
+                started: '',
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
 
     onContentSizeChange = (contentWidth, contentHeight) => {
         this.setState({ screenWidth: contentWidth });
@@ -68,6 +150,12 @@ class Number extends Component {
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
+
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                        <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                    </TouchableOpacity>                
+                </View>
             </View>
         );
     }
@@ -76,7 +164,7 @@ class Number extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffa0d2',
+        backgroundColor: '#f5fcff',
         width: SCREEN_WIDTH,
     },
     goback: {
@@ -86,14 +174,18 @@ const styles = StyleSheet.create({
     },
     card: {
         borderRadius: 50,
+        borderWidth: 2,
+        borderColor: '#abb0b2',
         backgroundColor: 'white',
         width: 300,
-        height: 500,
-        margin: 55,
+        height: 450,
+        marginTop: 10,
+        marginRight: 40,
+        marginLeft: 40,
+        marginBottom: 30,
         alignItems: 'center',
     },
     img: {
-        marginTop: 30,
         width: 250,
         height: 300,
         margin: 10,
@@ -101,7 +193,7 @@ const styles = StyleSheet.create({
     button: {
         width: 100,
         height: 50,
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#22509d',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
@@ -111,6 +203,17 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 25
     },
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 250,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 0,
+        marginBottom: 70
+    }
 });
 
 export default Number; 

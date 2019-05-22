@@ -11,7 +11,6 @@ import InitialJaumPage from './Components/WordsComponents/InitialJaumTab';
 import MoumPage from './Components/WordsComponents/MoumTab';
 import EndJaumPage from './Components/WordsComponents/EndJaumTab';
 import AbbreviationPage from './Components/WordsComponents/AbbreviationTab';
-import PunctuationPage from './Components/WordsComponents/PunctuationTab';
 import CategoryPage from './Components/WordsComponents/CategoryTab';
 
 import ColorPage from './Components/CategoryStudy/Color';
@@ -24,6 +23,11 @@ import WeekdayPage from './Components/CategoryStudy/Weekday';
 import JaumQuiz1 from './Components/QuizLevel/JaumQuizzes/JaumQuiz1';
 import JaumQuiz2 from './Components/QuizLevel/JaumQuizzes/JaumQuiz2';
 import JaumQuiz3 from './Components/QuizLevel/JaumQuizzes/JaumQuiz3';
+import MoumQuiz1 from './Components/QuizLevel/MoumQuizzes/MoumQuiz1';
+import MoumQuiz2 from './Components/QuizLevel/MoumQuizzes/MoumQuiz2';
+import AbQuiz1 from './Components/QuizLevel/AbbreviationQuizzes/AbQuiz1';
+import AbQuiz2 from './Components/QuizLevel/AbbreviationQuizzes/AbQuiz2';
+
 
 const App = createStackNavigator(
   {
@@ -35,7 +39,6 @@ const App = createStackNavigator(
     Moum: { screen: MoumPage },
     EndJaum: { screen: EndJaumPage },
     Abbreviation: { screen: AbbreviationPage },
-    Punctuation: { screen: PunctuationPage },
     Category: { screen: CategoryPage },
     Color: { screen: ColorPage },
     Animal: { screen: AnimalPage },
@@ -46,6 +49,10 @@ const App = createStackNavigator(
     JaumQuiz1: { screen: JaumQuiz1 },
     JaumQuiz2: { screen: JaumQuiz2 },
     JaumQuiz3: { screen: JaumQuiz3 },
+    MoumQuiz1: { screen: MoumQuiz1 },
+    MoumQuiz2: { screen: MoumQuiz2 },
+    AbQuiz1: { screen: AbQuiz1 },
+    AbQuiz2: { screen: AbQuiz2 },
   },
   { initialRouteName: "Home", headerMode: "none" }
 );

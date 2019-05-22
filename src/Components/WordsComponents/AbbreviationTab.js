@@ -5,9 +5,264 @@ import Tts from 'react-native-tts';
 import Toast from "@remobile/react-native-toast";
 import BluetoothSerial, {
     withSubscription
-  } from "react-native-bluetooth-serial-next";
+} from "react-native-bluetooth-serial-next";
+import Voice from 'react-native-voice';
 
 class AbbreviationTab extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            started: '',
+            results: [],
+   
+        };
+        this.mounted = false;
+        Tts.speak("어떤 글자를 알고싶나요", {language:"ko"});
+
+        Voice.onSpeechStart = this.onSpeechStart.bind(this);
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
+    }
+
+    componentDidMount() {
+        this.mounted= true;
+    }
+
+    componentWillUnmount() {
+        Voice.destroy().then(Voice.removeAllListeners);
+        this.mounted = false;
+    }
+
+    onSpeechStart(e) {
+        if (this.mounted) { 
+            this.setState({
+                started: '√',
+            });
+        };
+    }
+
+    onSpeechPartialResults(e) {
+        let speech = e.value[0].split(" ").slice(-1)[0];
+        const device_dot_in_abbreviation = this.props.navigation.getParam('deviceinfo2', 'cantread');
+        const {goBack} = this.props.navigation;
+        console.log("device info in abbreviation: ", device_dot_in_abbreviation.id);
+
+        if (speech.includes("뒤로")) {
+            goBack();
+        }
+        else if (speech.includes("가")) {               
+            this.write(device_dot_in_abbreviation.id, "1110101F");
+            this.setState({
+                results: '',
+            });
+        } 
+        else if (speech.includes("나")) {
+            this.write(device_dot_in_abbreviation.id, "1100100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("다")) {
+            this.write(device_dot_in_abbreviation.id, "1010100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("마")) {
+            this.write(device_dot_in_abbreviation.id, "1100010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("바")) {
+            this.write(device_dot_in_abbreviation.id, "1000110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("사")) {
+            this.write(device_dot_in_abbreviation.id, "1111000F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("자")) {
+            this.write(device_dot_in_abbreviation.id, "1000101F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("카")) {
+            this.write(device_dot_in_abbreviation.id, "1110100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("타")) {
+            this.write(device_dot_in_abbreviation.id, "1110010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("파")) {
+            this.write(device_dot_in_abbreviation.id, "1100110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("하")) {
+            this.write(device_dot_in_abbreviation.id, "1010110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("억")) {
+            this.write(device_dot_in_abbreviation.id, "1100111F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("언")) {
+            this.write(device_dot_in_abbreviation.id, "1011111F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("얼")) {
+            this.write(device_dot_in_abbreviation.id, "1011110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("연")) {
+            this.write(device_dot_in_abbreviation.id, "1100001F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("열")) {
+            this.write(device_dot_in_abbreviation.id, "1110011F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("영")) {
+            this.write(device_dot_in_abbreviation.id, "1110111F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("옥")) {
+            this.write(device_dot_in_abbreviation.id, "1101101F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("온")) {
+            this.write(device_dot_in_abbreviation.id, "1111011F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("옹")) {
+            this.write(device_dot_in_abbreviation.id, "1111111F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("운")) {
+            this.write(device_dot_in_abbreviation.id, "1110110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("울")) {
+            this.write(device_dot_in_abbreviation.id, "1111101F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("은")) {
+            this.write(device_dot_in_abbreviation.id, "1101011F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("을")) {
+            this.write(device_dot_in_abbreviation.id, "1011101F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("것")) {
+            this.write(device_dot_in_abbreviation.id, "2000111011100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("받침쌍시옷")) {
+            this.write(device_dot_in_abbreviation.id, "1001100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("그래서")) {
+            this.write(device_dot_in_abbreviation.id, "2100000011100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("그러나")) {
+            this.write(device_dot_in_abbreviation.id, "2100000100100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("그러면")) {
+            this.write(device_dot_in_abbreviation.id, "2100000010010F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("그러므로")) {
+            this.write(device_dot_in_abbreviation.id, "2100000010001F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("그런데")) {
+            this.write(device_dot_in_abbreviation.id, "2100000101110F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("그리고")) {
+            this.write(device_dot_in_abbreviation.id, "2100000101001F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("그리하여")) {
+            this.write(device_dot_in_abbreviation.id, "2100000100011F");
+            this.setState({
+                results: '',
+            });
+        }
+    }
+
+    async _startRecognition(e) {
+        if (this.mounted) {
+            this.setState({
+                started: '',
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
+
     write = async (id, message) => {
         try {
           await BluetoothSerial.device(id).write(message);
@@ -26,6 +281,12 @@ class AbbreviationTab extends React.Component{
             <ScrollView style={ styles.container }>
                 <View style={styles.goback}> 
                     <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Tts.speak("뒤로가기", { language: 'ko', rate: 0.75 });}} />
+                </View>
+
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                        <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                    </TouchableOpacity>                
                 </View>
 
                 <View style={styles.syllables}>
@@ -194,6 +455,8 @@ class AbbreviationTab extends React.Component{
                         </TouchableOpacity>
                     </View>
                 </View>
+
+                
             </ScrollView>
         );
     }
@@ -229,6 +492,17 @@ const styles = StyleSheet.create({
         textAlign:'center', 
         fontWeight:'bold', 
         fontSize:30,
+    },
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 250,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 40
     }
 });
 

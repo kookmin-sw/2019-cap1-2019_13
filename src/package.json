@@ -15,7 +15,8 @@
     "react-native-gesture-handler": "^1.2.1",
     "react-native-tts": "^3.0.0",
     "react-native-voice": "^0.2.6",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "utf8": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

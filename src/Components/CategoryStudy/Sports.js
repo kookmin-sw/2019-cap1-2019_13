@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Icon } from 'native-base';
 import Tts from 'react-native-tts';
+import Toast from "@remobile/react-native-toast";
 import BluetoothSerial, {
     withSubscription
 } from "react-native-bluetooth-serial-next";
+import Voice from 'react-native-voice';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -12,6 +14,87 @@ class Sports extends Component {
     state = {
         screenWidth: 0,
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            started: '',
+            results: [],
+   
+        };
+        this.mounted = false;
+        Tts.speak("스포츠를 말해보세요", {language:"ko"});
+
+        Voice.onSpeechStart = this.onSpeechStart.bind(this);
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
+    }
+
+    componentDidMount() {
+        this.mounted= true;
+    }
+
+    componentWillUnmount() {
+        Voice.destroy().then(Voice.removeAllListeners);
+        this.mounted = false;
+    }
+
+    onSpeechStart(e) {
+        if (this.mounted) { 
+            this.setState({
+                started: '√',
+            });
+        };
+    }
+
+    onSpeechPartialResults(e) {
+        console.log('here sports');
+        var speech = e.value[0].split(" ").slice(-1)[0];
+        console.log(speech);
+        const {goBack} = this.props.navigation;
+        const device_dot_in_sports = this.props.navigation.getParam('deviceinfo2', 'cantread');
+
+        if (speech.includes("뒤로")) {
+            goBack();
+        }
+        else if (speech.includes("축구")) {
+            this.write(device_dot_in_sports.id, "5000011101100100000000100101100F");
+            this.setState({
+                results: '',
+            });
+        } 
+        else if (speech.includes("야구")) {
+            this.write(device_dot_in_sports.id, "3001110000100101100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("농구")) {
+            this.write(device_dot_in_sports.id, "5100100101001011011000100101100F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("골프")) {
+            this.write(device_dot_in_sports.id, "5000100101001010000100110010101F");
+            this.setState({
+                results: '',
+            });
+        }
+    }
+
+    async _startRecognition(e) {
+        if (this.mounted) {
+            this.setState({
+                started: '',
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
 
     onContentSizeChange = (contentWidth, contentHeight) => {
         this.setState({ screenWidth: contentWidth });
@@ -62,11 +145,17 @@ class Sports extends Component {
 
                     <View style={styles.card}>
                         <Image source={{uri: 'http://pngimg.com/uploads/golf/golf_PNG33.png'}} style={styles.img}></Image>
-                        <TouchableOpacity onPress={()=>{Tts.speak("골프", { language: 'ko', rate: 0.75 }); this.write(device_dot_in_sports.id, "5000100101001010000100110010101F")}} style={styles.button}>
+                        <TouchableOpacity onPress={()=>{Tts.speak("골프", { language: 'ko', rate: 0.75 }); this.write(device_dot_in_sports.id, "5000100101001010000100110010101F");}} style={styles.button}>
                             <Text style={styles.text}>골프</Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
+
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                        <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                    </TouchableOpacity>                
+                </View>
             </View>
         );
     }
@@ -75,7 +164,7 @@ class Sports extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffa0d2',
+        backgroundColor: '#f5fcff',
         width: SCREEN_WIDTH,
     },
     goback: {
@@ -85,14 +174,18 @@ const styles = StyleSheet.create({
     },
     card: {
         borderRadius: 50,
+        borderWidth: 2,
+        borderColor: '#abb0b2',
         backgroundColor: 'white',
         width: 300,
-        height: 500,
-        margin: 55,
+        height: 450,
+        marginTop: 10,
+        marginRight: 40,
+        marginLeft: 40,
+        marginBottom: 30,
         alignItems: 'center',
     },
     img: {
-        marginTop: 30,
         width: 250,
         height: 300,
         margin: 10,
@@ -100,7 +193,7 @@ const styles = StyleSheet.create({
     button: {
         width: 100,
         height: 50,
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#22509d',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
@@ -110,6 +203,17 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 25
     },
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 250,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 0,
+        marginBottom: 70
+    }
 });
 
 export default Sports; 

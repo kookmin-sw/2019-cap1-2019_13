@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Icon } from 'native-base';
+import Toast from "@remobile/react-native-toast";
 import Tts from 'react-native-tts';
 import BluetoothSerial, {
     withSubscription
 } from "react-native-bluetooth-serial-next";
+import Voice from 'react-native-voice';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -12,6 +14,87 @@ class Season extends Component {
     state = {
         screenWidth: 0,
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            started: '',
+            results: [],
+   
+        };
+        this.mounted = false;
+        Tts.speak("계절을 말해보세요", {language:"ko"});
+
+        Voice.onSpeechStart = this.onSpeechStart.bind(this);
+        Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
+    }
+
+    componentDidMount() {
+        this.mounted= true;
+    }
+
+    componentWillUnmount() {
+        Voice.destroy().then(Voice.removeAllListeners);
+        this.mounted = false;
+    }
+
+    onSpeechStart(e) {
+        if (this.mounted) { 
+            this.setState({
+                started: '√',
+            });
+        };
+    }
+
+    onSpeechPartialResults(e) {
+        console.log('here season');
+        var speech = e.value[0].split(" ").slice(-1)[0];
+        console.log(speech);
+        const {goBack} = this.props.navigation;
+        const device_dot_in_season = this.props.navigation.getParam('deviceinfo2', 'cantread');
+
+        if (speech.includes("뒤로")) {
+            goBack();
+        }
+        else if (speech.includes("봄")) {
+            this.write(device_dot_in_season.id, "3000110101001010001F");
+            this.setState({
+                results: '',
+            });
+        } 
+        else if (speech.includes("여름")) {
+            this.write(device_dot_in_season.id, "4100011000010010101010001F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("가을")) {
+            this.write(device_dot_in_season.id, "3110101010101010000F");
+            this.setState({
+                results: '',
+            });
+        }
+        else if (speech.includes("겨울")) {
+            this.write(device_dot_in_season.id, "3000100100011111101F");
+            this.setState({
+                results: '',
+            });
+        }
+    }
+
+    async _startRecognition(e) {
+        if (this.mounted) {
+            this.setState({
+                started: '',
+                results: [],
+            });
+            try {
+                await Voice.start('ko-KR');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
 
     onContentSizeChange = (contentWidth, contentHeight) => {
         this.setState({ screenWidth: contentWidth });
@@ -55,18 +138,24 @@ class Season extends Component {
 
                     <View style={styles.card}>
                         <Image source={{uri: 'https://atlas-content-cdn.pixelsquid.com/stock-images/fall-tree-deciduous-q1A7l82-600.jpg'}} style={styles.img}></Image>
-                        <TouchableOpacity onPress={()=>{Tts.speak("가을", { language: 'ko', rate: 0.75 }); this.write(device_dot_in_season.id, "3110101010101010000F")}} style={styles.button}>
+                        <TouchableOpacity onPress={()=>{Tts.speak("가을", { language: 'ko', rate: 0.75 }); this.write(device_dot_in_season.id, "3110101010101010000F");}} style={styles.button}>
                             <Text style={styles.text}>가을</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={styles.card}>
                         <Image source={{uri: 'data:image/jpeg;base64,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'}} style={styles.img}></Image>
-                        <TouchableOpacity onPress={()=>{Tts.speak("겨울", { language: 'ko', rate: 0.75 }); this.write(device_dot_in_season.id, "3000100100011111101F")}} style={styles.button}>
+                        <TouchableOpacity onPress={()=>{Tts.speak("겨울", { language: 'ko', rate: 0.75 }); this.write(device_dot_in_season.id, "3000100100011111101F");}} style={styles.button}>
                             <Text style={styles.text}>겨울</Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
+
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity style={styles.sttbutton} onPress={() => {this._startRecognition();}}>
+                        <Text style={{color: 'white', fontSize: 70}}>음성인식</Text>
+                    </TouchableOpacity>                
+                </View>
             </View>
         );
     }
@@ -75,7 +164,7 @@ class Season extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffa0d2',
+        backgroundColor: '#f5fcff',
         width: SCREEN_WIDTH,
     },
     goback: {
@@ -85,14 +174,18 @@ const styles = StyleSheet.create({
     },
     card: {
         borderRadius: 50,
+        borderWidth: 2,
+        borderColor: '#abb0b2',
         backgroundColor: 'white',
         width: 300,
-        height: 500,
-        margin: 55,
+        height: 450,
+        marginTop: 10,
+        marginRight: 40,
+        marginLeft: 40,
+        marginBottom: 30,
         alignItems: 'center',
     },
     img: {
-        marginTop: 30,
         width: 250,
         height: 300,
         margin: 10,
@@ -100,7 +193,7 @@ const styles = StyleSheet.create({
     button: {
         width: 100,
         height: 50,
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#22509d',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
@@ -110,6 +203,17 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 25
     },
+    sttbutton: {
+        borderRadius: 30,
+        margin: 30,
+        height: 250,
+        width: 500, 
+        backgroundColor: '#ff9933',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 0,
+        marginBottom: 70
+    }
 });
 
 export default Season; 
