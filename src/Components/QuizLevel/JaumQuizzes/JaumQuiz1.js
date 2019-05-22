@@ -28,10 +28,10 @@ export default class JaumQuiz1 extends Component {
 
     write = async (id, message) => {
         try {
-          await BluetoothSerial.device(id).write(message);
-          Toast.showShortBottom("Successfuly wrote to device");
+            await BluetoothSerial.device(id).write(message);
+            Toast.showShortBottom("Successfuly wrote to device");
         } catch (e) {
-          Toast.showShortBottom(e.message);
+            Toast.showShortBottom(e.message);
         }
     };
 
@@ -118,28 +118,27 @@ export default class JaumQuiz1 extends Component {
                     <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Tts.speak("뒤로가기", { language: "ko", rate : 0.75 });}} />
                 </View>
 
-                <TouchableOpacity style={{ flex: 0.9 }}  onPress={() => {this._startRecognition(); }}>
+                    <TouchableOpacity style={{ flex: 0.9 }}>
                     
                     <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                        <TouchableOpacity style={styles.buttonst} onPress={() => {this._startRecognition(); }} >
+                        <TouchableOpacity style={styles.buttonst} onPress={() => {Tts.speak("자음퀴즈입니다. 초성 'ㄱ'은 무엇인가요?", {language:"ko"});}} >
                             <Text style ={{fontSize:30, color:'white'}}>문제듣기 </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.quizbutton} onPress={() => {this._startRecognition(); }} >
+                        
                             <Text style={{color: 'black', fontSize: 75}}>Quiz</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.buttonst} onPress={() => {this._startRecognition(); }} >
+                        
+                        <TouchableOpacity style={styles.buttonst} onPress={() => {this.props.navigation.navigate('JaumQuiz2');}} >
                             <Text style ={{fontSize:30, color:'white'}}>다음문제 </Text>
                         </TouchableOpacity>
                     </View>
                     
                     <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                        <TouchableOpacity style={styles.buttonst2} onPress={() => {this._startRecognition(); }}  >
+                        <TouchableOpacity style={styles.buttonst2} onPress={() =>  {this.props.navigation.navigate('Quiz'); }}  >
                             <Text style ={{fontSize:20, color:'white' }}>시작페이지</Text>
                         </TouchableOpacity>
                                     
-                        <TouchableOpacity style={styles.buttonst2} onPress={() => {this._startRecognition(); }}  >
+                        <TouchableOpacity style={styles.buttonst2} onPress={() => {Tts.speak("정답은 1번입니다.",{language:"ko"}); }}  >
                             <Text style ={{fontSize:20, color:'white' }}>정답듣기</Text>
                         </TouchableOpacity>
                     </View>
@@ -149,15 +148,15 @@ export default class JaumQuiz1 extends Component {
                     </View>
 
                     <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 50}}>
-                        <TouchableOpacity style={styles.button} onPress={() => {this._startRecognition();}}>
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("일번",{language:"ko"});}}>
                             <Text style ={{fontSize:70,color:'white' }}>1</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.button} onPress={() => {this._startRecognition();}} >
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("이번",{language:"ko"});}}>
                             <Text style ={{fontSize:70,color:'white'}}>2</Text>
                         </TouchableOpacity>
                             
-                        <TouchableOpacity style={styles.button} onPress={() => {this._startRecognition();}} >
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("삼번",{language:"ko"});}}>
                             <Text style ={{fontSize:70,color:'white'}}>3</Text>
                         </TouchableOpacity>
                     </View>
@@ -169,7 +168,7 @@ export default class JaumQuiz1 extends Component {
                 </TouchableOpacity>
             </View>
         );
-    }    
+}    
 }
 
 const styles = StyleSheet.create({
@@ -221,4 +220,3 @@ const styles = StyleSheet.create({
         marginTop: 10,
     }
 });
-      
