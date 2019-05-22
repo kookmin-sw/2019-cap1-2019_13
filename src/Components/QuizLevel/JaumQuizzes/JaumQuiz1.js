@@ -20,7 +20,7 @@ export default class JaumQuiz1 extends Component {
            
         };
 
-        Tts.speak("자음퀴즈입니다 초성ㄱ은 몇번인가요?",{language:"ko"});
+        Tts.speak("자음퀴즈입니다 초성기역은 몇번일까요?",{language:"ko"});
 
         Voice.onSpeechStart = this.onSpeechStart.bind(this);
         Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
@@ -28,10 +28,10 @@ export default class JaumQuiz1 extends Component {
 
     write = async (id, message) => {
         try {
-            await BluetoothSerial.device(id).write(message);
-            Toast.showShortBottom("Successfuly wrote to device");
+          await BluetoothSerial.device(id).write(message);
+          Toast.showShortBottom("Successfuly wrote to device");
         } catch (e) {
-            Toast.showShortBottom(e.message);
+          Toast.showShortBottom(e.message);
         }
     };
 
@@ -49,17 +49,21 @@ export default class JaumQuiz1 extends Component {
             this.setState({
                 started: '√',
             });
-
         };
     }
     
     onSpeechPartialResults(e) {
         let speech = e.value[0].split(" ").slice(-1)[0];
+        console.log(speech);
+        const {goBack} = this.props.navigation;
         const device_dot_in_jaumquiz = this.props.navigation.getParam('deviceinfo3', 'cantread');
         console.log("device info in jaumquiz: ", device_dot_in_jaumquiz.id);
         
-        if (speech.includes("문제")) {
-            Tts.speak("자음퀴즈입니다. 초성 'ㄱ'은 무엇인가요?", {language:"ko"});
+        if (speech.includes("시작")) {
+            goBack();
+        }
+        else if (speech.includes("문제")) {
+            Tts.speak("초성 기역은 무엇인가요?", {language:"ko"});
             this.setState({
                 results: '',
 
@@ -77,19 +81,13 @@ export default class JaumQuiz1 extends Component {
                 results: '',
             });
         }
-        else if (speech.includes("시작")) {
-            this.props.navigation.navigate('Quiz');
-            this.setState({
-                results: '',
-            });
-        }
-        else if (speech.includes("1번")) {
+        else if (speech.includes("1번") || speech.includes("일번")) {
             this.write(device_dot_in_jaumquiz.id, "1100111F");
         }
-        else if (speech.includes("2번")) {
+        else if (speech.includes("2번") || speech.includes("이번")) {
             this.write(device_dot_in_jaumquiz.id, "1010101F");
         }
-        else if (speech.includes("3번")) {
+        else if (speech.includes("3번") || speech.includes("삼번")) {
             this.write(device_dot_in_jaumquiz.id, "1010100F");
         }
 
@@ -111,6 +109,7 @@ export default class JaumQuiz1 extends Component {
 
     render() {
         const {goBack} = this.props.navigation;
+        const device_dot_in_jaumquiz = this.props.navigation.getParam('deviceinfo3', 'cantread');
 
         return (
             <View style={{ flex: 1, backgroundColor : '#f5fcff' }}>
@@ -118,27 +117,28 @@ export default class JaumQuiz1 extends Component {
                     <Icon name="md-arrow-round-back" onPress={()=>{goBack(); Tts.speak("뒤로가기", { language: "ko", rate : 0.75 });}} />
                 </View>
 
-                    <TouchableOpacity style={{ flex: 0.9 }}>
+                <TouchableOpacity style={{ flex: 0.9 }}>
                     
                     <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                        <TouchableOpacity style={styles.buttonst} onPress={() => {Tts.speak("자음퀴즈입니다. 초성 'ㄱ'은 무엇인가요?", {language:"ko"});}} >
-                            <Text style ={{fontSize:30, color:'white'}}>문제듣기 </Text>
+                        <TouchableOpacity style={styles.buttonst} onPress={() => {Tts.speak("초성기역은 무엇인가요?", { language: "ko", rate : 0.75 });}} >
+                            <Text style ={{fontSize:30, color:'white'}}>문제듣기</Text>
                         </TouchableOpacity>
 
-                        
+                        <TouchableOpacity style={styles.quizbutton}>
                             <Text style={{color: 'black', fontSize: 75}}>Quiz</Text>
-                        
-                        <TouchableOpacity style={styles.buttonst} onPress={() => {this.props.navigation.navigate('JaumQuiz2');}} >
-                            <Text style ={{fontSize:30, color:'white'}}>다음문제 </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.buttonst} onPress={() => {Tts.speak("다음문제", { language: "ko", rate : 0.75 }); this.props.navigation.navigate('JaumQuiz2');}} >
+                            <Text style ={{fontSize:30, color:'white'}}>다음</Text>
                         </TouchableOpacity>
                     </View>
                     
                     <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                        <TouchableOpacity style={styles.buttonst2} onPress={() =>  {this.props.navigation.navigate('Quiz'); }}  >
+                        <TouchableOpacity style={styles.buttonst2} onPress={() => {goBack(); Tts.speak("시작페이지로가기", { language: "ko", rate : 0.75 });}}  >
                             <Text style ={{fontSize:20, color:'white' }}>시작페이지</Text>
                         </TouchableOpacity>
                                     
-                        <TouchableOpacity style={styles.buttonst2} onPress={() => {Tts.speak("정답은 1번입니다.",{language:"ko"}); }}  >
+                        <TouchableOpacity style={styles.buttonst2} onPress={() => {Tts.speak("정답은 1번입니다.", { language: "ko", rate : 0.75 });}}  >
                             <Text style ={{fontSize:20, color:'white' }}>정답듣기</Text>
                         </TouchableOpacity>
                     </View>
@@ -148,15 +148,15 @@ export default class JaumQuiz1 extends Component {
                     </View>
 
                     <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 50}}>
-                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("일번",{language:"ko"});}}>
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("1번", { language: "ko", rate : 0.75 }); this.write(device_dot_in_jaumquiz.id, "1100111F");}}>
                             <Text style ={{fontSize:70,color:'white' }}>1</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("이번",{language:"ko"});}}>
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("2번", { language: "ko", rate : 0.75 }); this.write(device_dot_in_jaumquiz.id, "1010101F");}} >
                             <Text style ={{fontSize:70,color:'white'}}>2</Text>
                         </TouchableOpacity>
                             
-                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("삼번",{language:"ko"});}}>
+                        <TouchableOpacity style={styles.button} onPress={() => {Tts.speak("3번", { language: "ko", rate : 0.75 }); this.write(device_dot_in_jaumquiz.id, "1010100F");}} >
                             <Text style ={{fontSize:70,color:'white'}}>3</Text>
                         </TouchableOpacity>
                     </View>
@@ -168,7 +168,7 @@ export default class JaumQuiz1 extends Component {
                 </TouchableOpacity>
             </View>
         );
-}    
+    }    
 }
 
 const styles = StyleSheet.create({
@@ -220,3 +220,4 @@ const styles = StyleSheet.create({
         marginTop: 10,
     }
 });
+      
