@@ -23,7 +23,7 @@ class Weekday extends Component {
    
         };
         this.mounted = false;
-        Tts.speak("동물을 말해보세요", {language:"ko"});
+        Tts.speak("요일을 말해보세요", {language:"ko"});
 
         Voice.onSpeechStart = this.onSpeechStart.bind(this);
         Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
