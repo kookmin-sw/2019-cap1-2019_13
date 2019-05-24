@@ -53,19 +53,19 @@ class StudyPage extends Component{
                 results: '',
             });
         } 
-        else if (speech.includes("모음")) {
+        else if (speech.includes("모음") || speech.includes("무음") || speech.includes("뭐")) {
             this.props.navigation.navigate('Moum', {deviceinfo2: device_dot});
             this.setState({
                 results: '',
             });
         }
-        else if (speech.includes("거")) {
+        else if (speech.includes("거") || speech.includes("약") || speech.includes("거야") || speech.includes("자")) {
             this.props.navigation.navigate('Abbreviation', {deviceinfo2: device_dot});
             this.setState({
                 results: '',
             });
         }
-        else if (speech.includes("종자")) {
+        else if (speech.includes("종성")) {
             this.props.navigation.navigate('EndJaum', {deviceinfo2: device_dot});
             this.setState({
                 results: '',
