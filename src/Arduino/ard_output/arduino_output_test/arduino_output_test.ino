@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 
-int LeftSolenoid[6]={4, 5, 6, 7, 8, 9};
-int RightSolenoid[6]={10, 11, 12, 13, 14, 15};
+int LeftSolenoid[6]={13, 12, 11, 10, 9, 8};
+int RightSolenoid[6]={7, 6, 5, 4, 3, 2};
 int DataArray[55]={0};
 
 char LeftSol_Status[6]={LOW};
@@ -12,10 +12,10 @@ int Rx = 3;
 int DataLength = 0;
 int Bluetooth = 0;
 
-SoftwareSerial BTSerial(Tx, Rx);   //bluetooth module Tx:Digital 2 Rx:Digital 3   
+//SoftwareSerial Serial1(Tx, Rx);   //bluetooth module Tx:Digital 2 Rx:Digital 3   
 
 void setup() {
-  BTSerial.begin(9600); //블루투스 통신 시작
+  Serial1.begin(9600); //블루투스 통신 시작
   Serial.begin(9600); //시리얼 통신 시작
   Bluetooth = 0;
   DataLength = 0;
@@ -31,13 +31,11 @@ void setup() {
     digitalWrite(LeftSolenoid[i], LeftSol_Status[i]);
     digitalWrite(RightSolenoid[i], RightSol_Status[i]);
   }
-
 }
 
 void loop() {
   String DotData = "";
-
-  if (BTSerial.available())
+  if (Serial1.available())
   {   
     if(!Bluetooth)
     {
@@ -45,30 +43,37 @@ void loop() {
       Bluetooth = 1;
     }
     DotData = ReceiveDot();
-
-    Serial.print("Data Length : ");
+    //delay(2000);
+    Serial.println(DotData);
+    Serial.println("Data Length : ");
     Serial.println(DataLength);
 
     StoreDot(DotData,DataLength);
-
-    for(int i = 0; i < 6; i++)
+    
+    for(int j = 0; j < DataLength; j++)
     {
-      Serial.print(DataArray[i]);
+      for(int i = 1; i <= 6; i++)
+      {
+        Serial.print(DataArray[j*6+i]);
+      }
+      Serial.println("");
     }
-
     PrintDot(DataLength);
     ResetAll();
+    delay(2000);
+    Bluetooth = 0;
   }
 }
 
 String ReceiveDot()   
 {   
   String TempString = ""; 
-  while(BTSerial.available()>0)   
+  while(Serial1.available()>0)   
   {   
-    TempString = BTSerial.readStringUntil('F'); 
+    TempString = Serial1.readStringUntil('F'); 
   }  
   DataLength = int(TempString[0])-48;
+ 
   return TempString;     
 }
 
@@ -86,32 +91,33 @@ void StoreDot(String Ddata, int Dlength)
 
 void PrintDot(int Dlength)
 {
-  int DotSet = Dlength;
+  
   for(int i = 0; i < Dlength; i++)
   {
+    //Serial1.println(DotSet);
+    
     for(int j = 0; j < 6; j++)
     {
-      if(DotSet/2==0 && DotSet!=0)
+      if(i%2==0)
       {
-        if(DataArray[i*6+j]==1)
+        if(DataArray[i*6+j+1]==1)
           LeftSol_Status[j] = HIGH;
         else
           LeftSol_Status[j] = LOW;
-
         digitalWrite(LeftSolenoid[j], LeftSol_Status[j]);
+        Serial.println("Left!");
       }
-      else if(DotSet/2==1 && DotSet!=0)
+      else if(i%2==1)
       {
-        if(DataArray[i*6+j]==1)
+        if(DataArray[i*6+j+1]==1)
           RightSol_Status[j] = HIGH;
         else
           RightSol_Status[j] = LOW;
-          
         digitalWrite(RightSolenoid[j], RightSol_Status[j]);
+        Serial.println("Right!");
       }
     }
-    DotSet -= 1;
-    delay(1500);
+    delay(3000);
   }
   Serial.println("Printing complete");
 }
@@ -124,17 +130,16 @@ void ResetAll()
   }
   Bluetooth = 0;
   DataLength = 0;
-  delay(500);
+  /*
   for(int i = 0; i < 6; i++)
   {
     digitalWrite(LeftSolenoid[i], HIGH);
     digitalWrite(RightSolenoid[i], HIGH);
   }
-  delay(500);
   for(int i = 0; i < 6; i++)
   {
     digitalWrite(LeftSolenoid[i], LOW);
     digitalWrite(RightSolenoid[i], LOW);
-  }
+  }*/
   Serial.println("Reset complete");
 }
