@@ -7,12 +7,8 @@ int DataArray[55]={0};
 char LeftSol_Status[6]={LOW};
 char RightSol_Status[6]={LOW};
 
-int Tx = 2;
-int Rx = 3;
 int DataLength = 0;
-int Bluetooth = 0;
-
-//SoftwareSerial Serial1(Tx, Rx);   //bluetooth module Tx:Digital 2 Rx:Digital 3   
+int Bluetooth = 0;  
 
 void setup() {
   Serial1.begin(9600); //블루투스 통신 시작
@@ -42,15 +38,15 @@ void loop() {
       Serial.println("Bluetooth connected");
       Bluetooth = 1;
     }
-    DotData = ReceiveDot();
-    //delay(2000);
-    Serial.println(DotData);
-    Serial.println("Data Length : ");
+    DotData = ReceiveDot(); //수신 함수 실행
+
+    Serial.println(DotData); //전체 데이터 확인
+    Serial.println("Data Length : "); //데이터 길이 확인
     Serial.println(DataLength);
 
     StoreDot(DotData,DataLength);
     
-    for(int j = 0; j < DataLength; j++)
+    for(int j = 0; j < DataLength; j++)//시리얼 모니터로 데이터 확인
     {
       for(int i = 1; i <= 6; i++)
       {
@@ -58,9 +54,10 @@ void loop() {
       }
       Serial.println("");
     }
-    PrintDot(DataLength);
-    ResetAll();
-    delay(2000);
+
+    PrintDot(DataLength); //출력 함수 실행
+    ResetAll(); //초기화 함수 실행
+    delay(2000); //딜레이 2초 설정
     Bluetooth = 0;
   }
 }
@@ -68,10 +65,12 @@ void loop() {
 String ReceiveDot()   
 {   
   String TempString = ""; 
+
   while(Serial1.available()>0)   
   {   
     TempString = Serial1.readStringUntil('F'); 
   }  
+
   DataLength = int(TempString[0])-48;
  
   return TempString;     
@@ -81,12 +80,14 @@ void StoreDot(String Ddata, int Dlength)
 {
   int count = Dlength*6;
   int index = 1;
+
   while(count)
   {
     DataArray[index]=int(Ddata[index])-48;
     count -= 1;
     index += 1;
   }
+
 }
 
 void PrintDot(int Dlength)
@@ -94,7 +95,6 @@ void PrintDot(int Dlength)
   
   for(int i = 0; i < Dlength; i++)
   {
-    //Serial1.println(DotSet);
     
     for(int j = 0; j < 6; j++)
     {
@@ -117,8 +117,9 @@ void PrintDot(int Dlength)
         Serial.println("Right!");
       }
     }
-    delay(3000);
+    delay(2000);
   }
+
   Serial.println("Printing complete");
 }
 
@@ -131,15 +132,19 @@ void ResetAll()
   Bluetooth = 0;
   DataLength = 0;
   /*
+  delay(1000);
   for(int i = 0; i < 6; i++)
   {
     digitalWrite(LeftSolenoid[i], HIGH);
     digitalWrite(RightSolenoid[i], HIGH);
   }
+  delay(1000);
   for(int i = 0; i < 6; i++)
   {
     digitalWrite(LeftSolenoid[i], LOW);
     digitalWrite(RightSolenoid[i], LOW);
-  }*/
+  }
+  delay(700);
+  */
   Serial.println("Reset complete");
 }
