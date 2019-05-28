@@ -41,6 +41,7 @@ export default class Home extends Component {
       async componentDidMount() {
         this.events = this.props.events;
         this.mounted= true;
+        console.disableYellowBox = true;
     
         try {
           const [isEnabled, devices] = await Promise.all([
