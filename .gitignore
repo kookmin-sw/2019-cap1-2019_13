@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # Created by https://www.gitignore.io/api/macos,linux,windows,reactnative,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=macos,linux,windows,reactnative,visualstudio,visualstudiocode
 
@@ -272,7 +270,7 @@ xcuserdata/
 ## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
 DerivedData/
 *.moved-aside
-=======
+
 # OSX
 #
 .DS_Store
@@ -280,7 +278,7 @@ DerivedData/
 # Xcode
 #
 build/
->>>>>>> origin/rn-bluetoothconnection
+
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -289,7 +287,7 @@ build/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-<<<<<<< HEAD
+
 
 ### ReactNative.Buck Stack ###
 buck-out/
@@ -678,7 +676,7 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/macos,linux,windows,reactnative,visualstudio,visualstudiocode
-=======
+
 xcuserdata
 *.xccheckout
 *.moved-aside
@@ -720,4 +718,8 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
->>>>>>> origin/rn-bluetoothconnection
+
+.buckconfig
+.flowconfig
+.gitattributes
+.watchmanconfig
