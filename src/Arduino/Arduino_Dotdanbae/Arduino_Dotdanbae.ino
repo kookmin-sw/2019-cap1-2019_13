@@ -117,7 +117,7 @@ void PrintDot(int Dlength)
         Serial.println("Right!");
       }
     }
-    delay(2000);
+    delay(8000);
   }
 
   Serial.println("Printing complete");
