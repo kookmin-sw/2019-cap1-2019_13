@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Created by https://www.gitignore.io/api/macos,linux,windows,reactnative,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=macos,linux,windows,reactnative,visualstudio,visualstudiocode
@@ -271,6 +272,15 @@ xcuserdata/
 ## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
 DerivedData/
 *.moved-aside
+=======
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+>>>>>>> origin/rn-bluetoothconnection
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -279,6 +289,7 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+<<<<<<< HEAD
 
 ### ReactNative.Buck Stack ###
 buck-out/
@@ -667,3 +678,46 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/macos,linux,windows,reactnative,visualstudio,visualstudiocode
+=======
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+
+# Bundle artifact
+*.jsbundle
+>>>>>>> origin/rn-bluetoothconnection
