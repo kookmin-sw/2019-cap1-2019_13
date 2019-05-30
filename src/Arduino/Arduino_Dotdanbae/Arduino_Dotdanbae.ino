@@ -58,7 +58,6 @@ void loop() {
     PrintDot(DataLength); //출력 함수 실행
     ResetAll(); //초기화 함수 실행
     delay(2000); //딜레이 2초 설정
-    Bluetooth = 0;
   }
 }
 
@@ -117,7 +116,7 @@ void PrintDot(int Dlength)
         Serial.print("R");
       }
     }
-    delay(800);
+    delay(1300);
   }
 
   Serial.println("Printing complete");
